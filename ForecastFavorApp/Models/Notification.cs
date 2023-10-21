@@ -12,7 +12,7 @@ namespace ForecastFavorApp.Models
     /// </summary>
 
     public class Notification
-	{
+    {
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string NotificationType { get; set; }
