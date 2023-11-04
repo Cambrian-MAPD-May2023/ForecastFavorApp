@@ -1,41 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ForecastFavorApp.MainPage">
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:ForecastFavorApp"
+            x:Class="ForecastFavorApp.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+     <!-- Tab 1: Today -->
+    <ContentPage Title="Today">
+        <StackLayout>
+        <Label Text="Today's Weather" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+    <!-- Tab 2: Tomorrow -->
+    <ContentPage Title="Tomorrow">
+        <StackLayout>
+         <Label Text="Tomorrow's Weather" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+    <!-- Tab 3: 3 Days -->
+    <ContentPage Title="3 Days">
+        <StackLayout>
+        <Label Text="Weather for the Next 3 Days" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
-</ContentPage>
+</TabbedPage>
