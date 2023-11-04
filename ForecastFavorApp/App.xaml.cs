@@ -1,4 +1,5 @@
-﻿namespace ForecastFavorApp
+﻿using ForecastFavorApp.Views;
+namespace ForecastFavorApp
 {
     public partial class App : Application
     {
@@ -6,7 +7,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new WeatherPage();
         }
     }
 }
