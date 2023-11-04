@@ -1,72 +1,264 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
-namespace ForecastFavor.Models
+namespace ForecastFavorApp.Models
 {
-    /// <summary>
-    /// Represents a comprehensive weather model for a specific location.
-    /// 
-    /// Fields:
-    /// - LocationName: The name of the location for which the weather details are provided.
-    /// - CurrentCondition: Describes the current weather condition (e.g., Rainy, Sunny).
-    /// - CurrentTemperature: The current temperature for the location.
-    /// - Humidity: The current humidity percentage.
-    /// - WindSpeed: The speed of the wind.
-    /// - ChanceOfPrecipitation: Percentage chance that precipitation will occur.
-    /// - Recommendation: Provides user-friendly advice based on the weather conditions.
-    /// - HourlyForecasts: List of hourly weather forecasts.
-    /// - ThreeDayForecasts: List of daily weather forecasts for the next three days.
-    /// </summary>
-    public class WeatherModel
+
+    public class weatherData
     {
+        [JsonPropertyName("location")]
+        public Location Location { get; set; }
 
-        public string LocationName { get; set; }
+        [JsonPropertyName("current")]
+        public Current Current { get; set; }
+
+        [JsonPropertyName("forecast")]
+        public Forecast Forecast { get; set; }
+    }
+
+    public class Forecast
+    {
+        [JsonPropertyName("forecastday")]
+        public List<ForecastDay> ForecastDay { get; set; }
+    }
+
+    public class ForecastDay
+    {
+        [JsonPropertyName("date")]
+        public string Date { get; set; }
+
+        [JsonPropertyName("date_epoch")]
+        public long DateEpoch { get; set; }
+
+        [JsonPropertyName("day")]
+        public ForecastDayDetail Day { get; set; }
+
+        [JsonPropertyName("astro")]
+        public Astronomy Astro { get; set; }
+
+        [JsonPropertyName("hour")]
+        public List<ForecastHour> Hour { get; set; }
+    }
+
+    public class ForecastDayDetail
+    {
+        [JsonPropertyName("maxtemp_c")]
+        public double MaxTempC { get; set; }
+
+        [JsonPropertyName("maxtemp_f")]
+        public double MaxTempF { get; set; }
+
+        [JsonPropertyName("mintemp_c")]
+        public double MinTempC { get; set; }
+
+        [JsonPropertyName("mintemp_f")]
+        public double MinTempF { get; set; }
+
+        [JsonPropertyName("avgtemp_c")]
+        public double AvgTempC { get; set; }
+
+        [JsonPropertyName("avgtemp_f")]
+        public double AvgTempF { get; set; }
+
+        [JsonPropertyName("maxwind_mph")]
+        public double MaxWindMph { get; set; }
+
+        [JsonPropertyName("maxwind_kph")]
+        public double MaxWindKph { get; set; }
+
+        [JsonPropertyName("totalprecip_mm")]
+        public double TotalPrecipMm { get; set; }
+
+        [JsonPropertyName("totalprecip_in")]
+        public double TotalPrecipIn { get; set; }
+
+        [JsonPropertyName("avgvis_km")]
+        public double AvgVisKm { get; set; }
+
+        [JsonPropertyName("avgvis_miles")]
+        public double AvgVisMiles { get; set; }
+
+        [JsonPropertyName("avghumidity")]
+        public double AvgHumidity { get; set; }
+
+        [JsonPropertyName("condition")]
+        public Condition Condition { get; set; }
+
+        [JsonPropertyName("uv")]
+        public double UV { get; set; }
+
+      
+    }
 
 
-        public string CurrentCondition { get; set; }
-        public int CurrentTemperature { get; set; }
+    public class Astronomy
+    {
+        [JsonPropertyName("sunrise")]
+        public string Sunrise { get; set; }
+
+        [JsonPropertyName("sunset")]
+        public string Sunset { get; set; }
+
+        
+    }
+
+    public class ForecastHour
+    {
+        [JsonPropertyName("time_epoch")]
+        public long TimeEpoch { get; set; }
+
+        [JsonPropertyName("time")]
+        public string Time { get; set; }
+
+        // ... properties similar to the `Current` class for the hourly forecast
+        [JsonPropertyName("temp_c")]
+        public double TemperatureCelsius { get; set; }
+
+        // ... other relevant properties
+    }
+
+
+
+    public class Location
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("region")]
+        public string Region { get; set; }
+
+        [JsonPropertyName("country")]
+        public string Country { get; set; }
+
+        [JsonPropertyName("lat")]
+        public double Latitude { get; set; }
+
+        [JsonPropertyName("lon")]
+        public double Longitude { get; set; }
+
+        [JsonPropertyName("tz_id")]
+        public string TimeZoneId { get; set; }
+
+        [JsonPropertyName("localtime_epoch")]
+        public long LocalTimeEpoch { get; set; }
+
+        [JsonPropertyName("localtime")]
+        public string LocalTime { get; set; }
+    }
+
+    public class Current
+    {
+        [JsonPropertyName("last_updated_epoch")]
+        public long LastUpdatedEpoch { get; set; }
+
+        [JsonPropertyName("last_updated")]
+        public string LastUpdated { get; set; }
+
+        [JsonPropertyName("temp_c")]
+        public double TemperatureCelsius { get; set; }
+
+        [JsonPropertyName("temp_f")]
+        public double TemperatureFahrenheit { get; set; }
+
+        [JsonPropertyName("is_day")]
+        public int IsDay { get; set; }
+
+        [JsonPropertyName("condition")]
+        public Condition Condition { get; set; }
+
+        [JsonPropertyName("wind_mph")]
+        public double WindMph { get; set; }
+
+        [JsonPropertyName("wind_kph")]
+        public double WindKph { get; set; }
+
+        [JsonPropertyName("wind_degree")]
+        public int WindDegree { get; set; }
+
+        [JsonPropertyName("wind_dir")]
+        public string WindDirection { get; set; }
+
+        [JsonPropertyName("pressure_mb")]
+        public double PressureMb { get; set; }
+
+        [JsonPropertyName("pressure_in")]
+        public double PressureIn { get; set; }
+
+        [JsonPropertyName("precip_mm")]
+        public double PrecipitationMm { get; set; }
+
+        [JsonPropertyName("precip_in")]
+        public double PrecipitationIn { get; set; }
+
+        [JsonPropertyName("humidity")]
         public int Humidity { get; set; }
-        public string WindSpeed { get; set; }
-        public int ChanceOfPrecipitation { get; set; }
-        public string Recommendation { get; set; }
 
+        [JsonPropertyName("cloud")]
+        public int Cloud { get; set; }
 
-        public List<HourlyForecast> HourlyForecasts { get; set; }
+        [JsonPropertyName("feelslike_c")]
+        public double FeelsLikeCelsius { get; set; }
 
+        [JsonPropertyName("feelslike_f")]
+        public double FeelsLikeFahrenheit { get; set; }
 
-        public List<DailyForecast> ThreeDayForecasts { get; set; }
+        [JsonPropertyName("vis_km")]
+        public double VisibilityKm { get; set; }
+
+        [JsonPropertyName("vis_miles")]
+        public double VisibilityMiles { get; set; }
+
+        [JsonPropertyName("uv")]
+        public double UV { get; set; }
+
+        [JsonPropertyName("gust_mph")]
+        public double GustMph { get; set; }
+
+        [JsonPropertyName("gust_kph")]
+        public double GustKph { get; set; }
+
+        [JsonPropertyName("air_quality")]
+        public AirQuality AirQuality { get; set; }
     }
-    /// <summary>
-    /// Represents the weather forecast for a specific hour.
-    /// </summary>
-    public class HourlyForecast
+
+    public class Condition
     {
-        public DateTime Time { get; set; }
-        public int Temperature { get; set; }
-        public string Condition { get; set; }
+        [JsonPropertyName("text")]
+        public string Text { get; set; }
+
+        [JsonPropertyName("icon")]
+        public string Icon { get; set; }
+
+        [JsonPropertyName("code")]
+        public int Code { get; set; }
     }
 
-    /// <summary>
-    /// Represents the weather forecast for a specific day.
-    /// 
-    /// Fields:
-    /// - Date: The date of the forecast.
-    /// - Condition: Describes the weather condition for the day.
-    /// - HighTemperature: The highest expected temperature for the day.
-    /// - LowTemperature: The lowest expected temperature for the day.
-    /// - ChanceOfPrecipitation: Percentage chance that precipitation will occur.
-    /// - Recommendation: Provides user-friendly advice based on the weather forecast.
-    /// </summary>
-    public class DailyForecast
+    public class AirQuality
     {
-        public DateTime Date { get; set; }
-        public string Condition { get; set; }
-        public int HighTemperature { get; set; }
-        public int LowTemperature { get; set; }
-        public int ChanceOfPrecipitation { get; set; }
-        public string Recommendation { get; set; }
+        [JsonPropertyName("co")]
+        public double CO { get; set; }
+
+        [JsonPropertyName("no2")]
+        public double NO2 { get; set; }
+
+        [JsonPropertyName("o3")]
+        public double O3 { get; set; }
+
+        [JsonPropertyName("so2")]
+        public double SO2 { get; set; }
+
+        [JsonPropertyName("pm2_5")]
+        public double PM25 { get; set; }
+
+        [JsonPropertyName("pm10")]
+        public double PM10 { get; set; }
+
+        [JsonPropertyName("us-epa-index")]
+        public int USEPAIndex { get; set; }
+
+        [JsonPropertyName("gb-defra-index")]
+        public int GBDEFRAIndex { get; set; }
     }
+
 }
