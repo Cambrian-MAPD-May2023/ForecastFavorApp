@@ -18,14 +18,14 @@ public class WeatherService
         _httpClient.BaseAddress = new Uri(Constants.API_BASE_URL);
     }
 
-    public async Task<weatherData> GetWeatherInformation(string location)
+    public async Task<weatherData> GetWeatherInformation(string location, int days = 1)
     {
         if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
             return null;
 
         try
         {
-            string url = $"{Constants.API_BASE_URL}/current.json?key={Constants.API_KEY}&q={location}&aqi=yes";
+            string url = $"{Constants.API_BASE_URL}/forecast.json?key={Constants.API_KEY}&q={location}&days={days}&aqi=no&alerts=no";
             var response = await _httpClient.GetFromJsonAsync<weatherData>(url);
             return response;
         }
