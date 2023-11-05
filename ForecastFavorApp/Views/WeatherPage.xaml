@@ -1,59 +1,127 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:ForecastFavorApp.Models"
-             xmlns:vm="clr-namespace:ForecastFavorApp.ViewModels"
-             x:DataType="vm:WeatherViewModel"
-             x:Class="ForecastFavorApp.Views.WeatherPage"
-             Title=" Weather Information"
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:vm="clr-namespace:ForecastFavorApp.ViewModels"
+            x:Class="ForecastFavorApp.Views.WeatherPage"
+            x:DataType="vm:WeatherViewModel"
+            >
+
+    <!-- Today's Weather Tab -->
+    <ContentPage  Title="Today"
              BackgroundColor="#606cf2">
-    <VerticalStackLayout>
-        <Frame Margin=" 20">
-            <Grid ColumnSpacing="5">
+        <VerticalStackLayout>
+            <Frame Margin=" 20">
+                <Grid ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Entry Placeholder="Location" Grid.Column="0" Text="{Binding LocationInput}" TextColor="Black"/>
+                    <Button Text="Fetch" Grid.Column="1" Command="{Binding FetchWeatherInformationCommand}"/>
+                </Grid>
+            </Frame>
+            <Image WidthRequest="100" HeightRequest="100" Source="{Binding WeatherIcon}" />
+            <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding Temperature}"/>
+            <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding WeatherDescription}"/>
+            <Label HorizontalOptions="Center" FontSize="15" TextColor="White" FontAttributes="Bold" Text="{Binding LocationOutput}"/>
+
+            <Grid Margin="20" ColumnSpacing="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Entry Placeholder="Location" Grid.Column="0" Text="{Binding LocationInput}" TextColor="Black"/>
-                <Button Text="Fetch" Grid.Column="1" Command="{Binding FetchWeatherInformationCommand}"/>
+
+                <Frame Grid.Column="0">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Humidity" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Cloud" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <Frame Grid.Column="2">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Is Day" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
             </Grid>
-        </Frame>
-        <Image WidthRequest="100" HeightRequest="100" Source="{Binding WeatherIcon}" />
-        <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding Temperature}"/>
-        <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding WeatherDescription}"/>
-        <Label HorizontalOptions="Center" FontSize="15" TextColor="White" FontAttributes="Bold" Text="{Binding LocationOutput}"/>
 
-        <Grid Margin="20" ColumnSpacing="5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        </VerticalStackLayout>
+
+    </ContentPage>
+
+
+    <!-- Tomorrow's Forecast Tab -->
+    <ContentPage Title="Tomorrow" BackgroundColor="#606cf2">
+        <VerticalStackLayout>
+            <!-- Assume the icon is a full URL to the weather icon image -->
+            <Image WidthRequest="100" HeightRequest="100" Source="{Binding TomorrowWeatherIcon}" />
+
+            <!-- Temperature could be bound to either MaxTemp, MinTemp, or AvgTemp -->
+            <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding TomorrowTemperature}" />
             
-            <Frame Grid.Column="0">
-                <VerticalStackLayout>
-                    <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
-                    <Label Text="Humidity" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Frame>
-            <Frame Grid.Column="1">
-                <VerticalStackLayout>
-                    <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
-                    <Label Text="Cloud" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Frame>
-            <Frame Grid.Column="2">
-                <VerticalStackLayout>
-                    <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
-                    <Label Text="Is Day" HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Frame>
+            <!-- Weather condition text -->
+            <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding TomorrowWeatherDescription}" />
 
-        </Grid>
+            <!-- You won't have a 'LocationOutput' for tomorrow's forecast, as it will be the same as today's -->
 
-    </VerticalStackLayout> 
-    
-    
-   
-</ContentPage>
+            <!-- Additional details for tomorrow's forecast -->
+            <Grid Margin="20" ColumnSpacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Humidity -->
+                <Frame Grid.Column="0">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding TomorrowForecast.AvgHumidity}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Humidity" HorizontalOptions="Center" TextColor="#606cf2" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Precipitation -->
+                <Frame Grid.Column="1">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding TomorrowForecast.TotalPrecipMm}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                            <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"  />
+                    </VerticalStackLayout>
+                </Frame>
+
+              
+                
+            </Grid>
+        </VerticalStackLayout>
+    </ContentPage>
+
+
+
+    <!-- 3-Day Forecast Tab -->
+    <ContentPage Title="3-Day">
+        <StackLayout Padding="10">
+            <!-- Use a ListView or CollectionView to display the 3-day forecast -->
+            <CollectionView ItemsSource="{Binding Forecast.ForecastDay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage>
+
+</TabbedPage>
+
+
+

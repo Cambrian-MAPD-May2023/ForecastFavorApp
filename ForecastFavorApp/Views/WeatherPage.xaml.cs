@@ -4,7 +4,7 @@ using ForecastFavorApp.ViewModels;
 
 namespace ForecastFavorApp.Views
 {
-    public partial class WeatherPage : ContentPage
+    public partial class WeatherPage : TabbedPage
     {
         WeatherViewModel _viewModel;
 
