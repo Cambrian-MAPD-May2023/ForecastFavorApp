@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace ForecastFavorApp.Models
 {
-
+    // The main class representing weather data that includes location, current weather, and forecast information.
     public class weatherData
     {
         [JsonPropertyName("location")]
@@ -17,12 +17,14 @@ namespace ForecastFavorApp.Models
         public Forecast Forecast { get; set; }
     }
 
+    // Class representing the forecast, which includes a list of forecast days.
     public class Forecast
     {
         [JsonPropertyName("forecastday")]
         public List<ForecastDay> ForecastDay { get; set; }
     }
 
+    // Represents the weather forecast for a single day.
     public class ForecastDay
     {
         [JsonPropertyName("date")]
@@ -41,6 +43,7 @@ namespace ForecastFavorApp.Models
         public List<ForecastHour> Hour { get; set; }
     }
 
+    //Daily forecast data for a specific day
     public class ForecastDayDetail
     {
         [JsonPropertyName("maxtemp_c")]
@@ -91,7 +94,7 @@ namespace ForecastFavorApp.Models
       
     }
 
-
+    //Astronomical data for a specific day
     public class Astronomy
     {
         [JsonPropertyName("sunrise")]
@@ -102,7 +105,7 @@ namespace ForecastFavorApp.Models
 
         
     }
-
+    // Represents the weather forecast for a specific hour.
     public class ForecastHour
     {
         [JsonPropertyName("time_epoch")]
@@ -119,7 +122,7 @@ namespace ForecastFavorApp.Models
     }
 
 
-
+    // Location data including the name of the location, region, country, latitude, longitude, timezone ID, local time in epoch and readable format.
     public class Location
     {
         [JsonPropertyName("name")]
@@ -146,7 +149,7 @@ namespace ForecastFavorApp.Models
         [JsonPropertyName("localtime")]
         public string LocalTime { get; set; }
     }
-
+    // Current weather condition data including the last updated time, temperature, whether it is day or night, weather condition, wind details, pressure, precipitation, humidity, cloud cover, 'feels like' temperature, visibility, UV index, gust speed, and air quality.
     public class Current
     {
         [JsonPropertyName("last_updated_epoch")]
@@ -221,7 +224,7 @@ namespace ForecastFavorApp.Models
         [JsonPropertyName("air_quality")]
         public AirQuality AirQuality { get; set; }
     }
-
+    // Class representing the weather condition with a textual description, icon URL, and a condition code.
     public class Condition
     {
         [JsonPropertyName("text")]
@@ -234,6 +237,7 @@ namespace ForecastFavorApp.Models
         public int Code { get; set; }
     }
 
+    // Air quality data including measurements of CO, NO2, O3, SO2, particulate matter, and indexes from US EPA and GB DEFRA.
     public class AirQuality
     {
         [JsonPropertyName("co")]
