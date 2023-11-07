@@ -1,15 +1,24 @@
-<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm="clr-namespace:ForecastFavorApp.ViewModels"
             x:Class="ForecastFavorApp.Views.WeatherPage"
-            x:DataType="vm:WeatherViewModel"
-            >
+            x:DataType="vm:WeatherViewModel">
+
+    <!-- Search Location -->
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Frame CornerRadius="20" Padding="0" BackgroundColor="White" HeightRequest="30">
+                <SearchBar Placeholder="Location" Text="{Binding LocationInput}" TextColor="Black" PlaceholderColor="Gray"/>
+            </Frame>
+            <Button Text="Fetch" Command="{Binding FetchWeatherInformationCommand}" />
+        </StackLayout>
+    </NavigationPage.TitleView>
 
     <!-- Today's Weather Tab -->
     <ContentPage  Title="Today"
              BackgroundColor="#606cf2">
         <VerticalStackLayout>
-            <Frame Margin=" 20">
+            <!--<Frame Margin=" 20">
                 <Grid ColumnSpacing="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -20,7 +29,7 @@
                     <Entry Placeholder="Location" Grid.Column="0" Text="{Binding LocationInput}" TextColor="Black"/>
                     <Button Text="Fetch" Grid.Column="1" Command="{Binding FetchWeatherInformationCommand}"/>
                 </Grid>
-            </Frame>
+            </Frame> -->
             <Image WidthRequest="100" HeightRequest="100" Source="{Binding WeatherIcon}" />
             <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding Temperature}"/>
             <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding WeatherDescription}"/>
@@ -67,7 +76,7 @@
 
             <!-- Temperature could be bound to either MaxTemp, MinTemp, or AvgTemp -->
             <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding TomorrowTemperature}" />
-            
+
             <!-- Weather condition text -->
             <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding TomorrowWeatherDescription}" />
 
@@ -93,12 +102,12 @@
                 <Frame Grid.Column="1">
                     <VerticalStackLayout>
                         <Label Text="{Binding TomorrowForecast.TotalPrecipMm}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
-                            <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"  />
+                        <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"  />
                     </VerticalStackLayout>
                 </Frame>
 
-              
-                
+
+
             </Grid>
         </VerticalStackLayout>
     </ContentPage>
@@ -113,7 +122,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            
+
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

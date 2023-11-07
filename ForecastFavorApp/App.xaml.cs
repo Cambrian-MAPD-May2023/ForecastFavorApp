@@ -6,8 +6,8 @@ namespace ForecastFavorApp
         public App()
         {
             InitializeComponent();
+            MainPage = new NavigationPage(new WeatherPage());
 
-            MainPage = new WeatherPage();
         }
     }
 }
