@@ -1,10 +1,11 @@
 ﻿<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:vm="clr-namespace:ForecastFavorApp.ViewModels"
+            xmlns:viewmodel="clr-namespace:ForecastFavorApp.ViewModels"
             x:Class="ForecastFavorApp.Views.WeatherPage"
-            x:DataType="vm:WeatherViewModel">
-
-    <!-- Search Location -->
+            x:DataType="viewmodel:WeatherViewModel"
+           >
+   
+    <!--Search Location--> 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
             <Frame CornerRadius="20" Padding="0" BackgroundColor="White" HeightRequest="30">
@@ -15,8 +16,9 @@
     </NavigationPage.TitleView>
 
     <!-- Today's Weather Tab -->
-    <ContentPage  Title="Today"
-             BackgroundColor="#606cf2">
+    <ContentPage  Title="Today" BackgroundColor="#606cf2">
+        
+
         <VerticalStackLayout>
             <!--<Frame Margin=" 20">
                 <Grid ColumnSpacing="5">
@@ -29,7 +31,7 @@
                     <Entry Placeholder="Location" Grid.Column="0" Text="{Binding LocationInput}" TextColor="Black"/>
                     <Button Text="Fetch" Grid.Column="1" Command="{Binding FetchWeatherInformationCommand}"/>
                 </Grid>
-            </Frame> -->
+            </Frame>--> 
             <Image WidthRequest="100" HeightRequest="100" Source="{Binding WeatherIcon}" />
             <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding Temperature}"/>
             <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding WeatherDescription}"/>
@@ -70,6 +72,7 @@
 
     <!-- Tomorrow's Forecast Tab -->
     <ContentPage Title="Tomorrow" BackgroundColor="#606cf2">
+       
         <VerticalStackLayout>
             <!-- Assume the icon is a full URL to the weather icon image -->
             <Image WidthRequest="100" HeightRequest="100" Source="{Binding TomorrowWeatherIcon}" />
@@ -115,20 +118,91 @@
 
 
     <!-- 3-Day Forecast Tab -->
-    <ContentPage Title="3-Day">
-        <StackLayout Padding="10">
-            <!-- Use a ListView or CollectionView to display the 3-day forecast -->
-            <CollectionView ItemsSource="{Binding Forecast.ForecastDay}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
+    <ContentPage Title="3-Day" BackgroundColor="#606cf2">
 
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <StackLayout>
+            <!-- Day 1 Forecast -->
+            <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <!-- Day 1 Forecast Content -->
+                <Grid Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Weather Icon for Day 1 -->
+                    <Image Grid.Column="0" WidthRequest="50" HeightRequest="50" Source="{Binding TomorrowWeatherIcon}" Aspect="AspectFit"/>
+
+                    <!-- Day 1 and Description -->
+                    <StackLayout Grid.Column="1" Orientation="Vertical">
+                        <Label Text="{Binding ThreeDayForecastDetails[0].Condition.Text}" FontSize="Small" TextColor="Gray"/>
+                    </StackLayout>
+
+                    <!-- Temperature and Humidity for Day 1 -->
+                    <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding ThreeDayForecastDetails[0].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="{Binding ThreeDayForecastDetails[0].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Day 2 Forecast (Similar structure, update bindings) -->
+            <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <!-- Day 2 Forecast Content (Update bindings) -->
+                <Grid Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Weather Icon for Day 2 -->
+                    <Image Grid.Column="0" WidthRequest="50" HeightRequest="50" Source="{Binding SecondDayWeatherIcon}" Aspect="AspectFit"/>
+
+                    <!-- Day 2 and Description -->
+                    <StackLayout Grid.Column="1" Orientation="Vertical">
+                        <Label Text="{Binding ThreeDayForecastDetails[1].Condition.Text}" FontSize="Small" TextColor="Gray"/>
+                    </StackLayout>
+
+                    <!-- Temperature and Humidity for Day 2 -->
+                    <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding ThreeDayForecastDetails[1].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="{Binding ThreeDayForecastDetails[1].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Day 3 Forecast (Similar structure, update bindings) -->
+            <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <!-- Day 3 Forecast Content (Update bindings) -->
+                <Grid Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Weather Icon for Day 3 -->
+                    <Image Grid.Column="0" WidthRequest="50" HeightRequest="50" Source="{Binding ThirdDayWeatherIcon}" Aspect="AspectFit"/>
+
+                    <!-- Day 3 and Description -->
+                    <StackLayout Grid.Column="1" Orientation="Vertical">
+                        <Label Text="{Binding ThreeDayForecastDetails[2].Condition.Text}" FontSize="Small" TextColor="Gray"/>
+                    </StackLayout>
+
+                    <!-- Temperature and Humidity for Day 3 -->
+                    <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding ThreeDayForecastDetails[2].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="{Binding ThreeDayForecastDetails[2].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
         </StackLayout>
+
     </ContentPage>
+
+
 
 </TabbedPage>
 
