@@ -109,11 +109,11 @@ namespace ForecastFavorApp.Models
     // Represents the weather forecast for a specific hour.
     public class ForecastHour
     {
-        [JsonPropertyName("last_updated_epoch")]
-        public long LastUpdatedEpoch { get; set; }
+        [JsonPropertyName("time_epoch")]
+        public long TimeEpoch { get; set; }
 
-        [JsonPropertyName("last_updated")]
-        public string LastUpdated { get; set; }
+        [JsonPropertyName("time")]
+        public string Time { get; set; }
 
         [JsonPropertyName("temp_c")]
         public double TemperatureCelsius { get; set; }
