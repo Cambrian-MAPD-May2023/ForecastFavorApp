@@ -44,20 +44,20 @@
                 </Grid.ColumnDefinitions>
                 <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
-                        <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Cloud" HorizontalOptions="Center" TextColor="#606cf2"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
-                    <VerticalStackLayout>
                         <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="Humidity" HorizontalOptions="Center" TextColor="#606cf2"/>
                     </VerticalStackLayout>
                 </Frame>
+                <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding PrecipitationMm}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"/>
+                    </VerticalStackLayout>
+                </Frame>
                 <Frame Grid.Column="2" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
-                        <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Is Day" HorizontalOptions="Center" TextColor="#606cf2"/>
+                        <Label Text="{Binding Wind}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Wind" HorizontalOptions="Center" TextColor="#606cf2"/>
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
@@ -151,7 +151,7 @@
                 <!-- Humidity -->
                 <Frame Grid.Column="0">
                     <VerticalStackLayout>
-                        <Label Text="{Binding TomorrowForecast.AvgHumidity}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="{Binding TomorrowForecast.AvgHumidity, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="Humidity" HorizontalOptions="Center" TextColor="#606cf2" />
                     </VerticalStackLayout>
                 </Frame>
@@ -159,8 +159,15 @@
                 <!-- Precipitation -->
                 <Frame Grid.Column="1">
                     <VerticalStackLayout>
-                        <Label Text="{Binding TomorrowForecast.TotalPrecipMm}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="{Binding TomorrowForecast.TotalPrecipMm, StringFormat='{0}mm'}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"  />
+                    </VerticalStackLayout>
+                </Frame>
+                <!-- Precipitation -->
+                <Frame Grid.Column="2">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding TomorrowForecast.MaxWindKph, StringFormat='{0}kph'}" HorizontalOptions="Center" FontSize="30" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Max Wind" HorizontalOptions="Center" TextColor="#606cf2"  />
                     </VerticalStackLayout>
                 </Frame>
             </Grid>

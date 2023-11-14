@@ -43,6 +43,12 @@ namespace ForecastFavorApp.ViewModels
         private string humidity; // Current humidity percentage.
 
         [ObservableProperty]
+        private string precipitationMm; // Current precipitation
+
+        [ObservableProperty]
+        private string wind; // Current wind
+
+        [ObservableProperty]
         private string cloudCoverLevel; // Current cloud cover percentage.
 
         [ObservableProperty]
@@ -130,6 +136,8 @@ namespace ForecastFavorApp.ViewModels
                 WeatherDescription = weatherData.Current.Condition.Text;
                 LocationOutput = $"{weatherData.Location.Name}, {weatherData.Location.Region}, {weatherData.Location.Country}";
                 Humidity = $"{weatherData.Current.Humidity}%";
+                PrecipitationMm = $"{weatherData.Current.PrecipitationMm}mm";
+                Wind = $"{weatherData.Current.WindKph}kph";
                 CloudCoverLevel = $"{weatherData.Current.Cloud}%";
                 IsDay = weatherData.Current.IsDay == 1 ? "Day" : "Night";
               
