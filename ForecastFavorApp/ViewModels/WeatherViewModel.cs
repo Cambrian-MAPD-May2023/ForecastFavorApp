@@ -102,6 +102,8 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private DateTime currentDate;
 
+       
+
         [ObservableProperty]
         private ObservableCollection<ForecastDayDetail> threeDayForecastDetails; // Collection of detailed forecasts for the next three days.
 
@@ -154,7 +156,7 @@ namespace ForecastFavorApp.ViewModels
 
                 // Extract and store the hourly forecast for the current day.
                 HourlyForecast = new ObservableCollection<ForecastHour>(weatherData.Forecast.ForecastDay[0].Hour);
-
+                
 
 
 
