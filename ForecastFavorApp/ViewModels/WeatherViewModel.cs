@@ -109,6 +109,10 @@ namespace ForecastFavorApp.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<ForecastHour> hourlyForecast; // Collection of hourly forecast data for the current day.
+        [ObservableProperty]
+        private ObservableCollection<ForecastHour> hourlyForecast2; // Collection of hourly forecast data for the second day
+        [ObservableProperty]
+        private ObservableCollection<ForecastHour> hourlyForecast3; // Collection of hourly forecast data for the third day
 
         // Relay Command attribute that defines an asynchronous method for fetching weather information.
         [RelayCommand]
@@ -156,7 +160,10 @@ namespace ForecastFavorApp.ViewModels
 
                 // Extract and store the hourly forecast for the current day.
                 HourlyForecast = new ObservableCollection<ForecastHour>(weatherData.Forecast.ForecastDay[0].Hour);
-                
+                // Extract and store the hourly forecast for the second day.
+                HourlyForecast2 = new ObservableCollection<ForecastHour>(weatherData.Forecast.ForecastDay[1].Hour);
+                // Extract and store the hourly forecast for the third day.
+                HourlyForecast3 = new ObservableCollection<ForecastHour>(weatherData.Forecast.ForecastDay[2].Hour);
 
 
 

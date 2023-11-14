@@ -45,19 +45,19 @@
                 <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Cloud" HorizontalOptions="Center"/>
+                        <Label Text="Cloud" HorizontalOptions="Center" TextColor="#606cf2"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Humidity" HorizontalOptions="Center"/>
+                        <Label Text="Humidity" HorizontalOptions="Center" TextColor="#606cf2"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="2" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Is Day" HorizontalOptions="Center"/>
+                        <Label Text="Is Day" HorizontalOptions="Center" TextColor="#606cf2"/>
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
@@ -133,7 +133,7 @@
             <Image WidthRequest="100" HeightRequest="100" Source="{Binding TomorrowWeatherIcon}" />
 
             <!-- Temperature could be bound to either MaxTemp, MinTemp, or AvgTemp -->
-            <Label HorizontalOptions="Center" FontSize="70" TextColor="White" Text="{Binding TomorrowTemperature}" />
+            <Label HorizontalOptions="Center" FontSize="40" TextColor="White" Text="{Binding TomorrowTemperature}" />
 
             <!-- Weather condition text -->
             <Label HorizontalOptions="Center" FontSize="25" TextColor="White" FontAttributes="Bold" Text="{Binding TomorrowWeatherDescription}" />
@@ -163,10 +163,68 @@
                         <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"  />
                     </VerticalStackLayout>
                 </Frame>
+            </Grid>
+            <!-- Hourly Forecast Grid for Tomorrow -->
+            <Grid Margin="20" ColumnSpacing="10">
+                <!-- Define columns for each hour -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <!-- Add more columns as needed -->
+                </Grid.ColumnDefinitions>
 
-
+                <!-- Hourly Forecast Data for Each Hour -->
+                <!-- Hour 1 -->
+                <Frame Grid.Column="0" HasShadow="True" BackgroundColor="White" CornerRadius="5">
+                    <StackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="{Binding HourlyForecast2[0].Condition.Icon, StringFormat='http:{0}'}" WidthRequest="35" HeightRequest="35" />
+                        <Label Text="{Binding HourlyForecast2[0].TemperatureCelsius, StringFormat='{0}°C'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[0].Humidity, StringFormat='{0}%'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[0].Time, StringFormat='{0:HH:mm tt}'}" FontSize="12" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+                <!-- Hour 2 -->
+                <Frame Grid.Column="1" HasShadow="True" BackgroundColor="White" CornerRadius="5">
+                    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="{Binding HourlyForecast2[1].Condition.Icon, StringFormat='http:{0}'}" WidthRequest="35" HeightRequest="35" />
+                        <Label Text="{Binding HourlyForecast2[1].TemperatureCelsius, StringFormat='{0}°C'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[1].Humidity, StringFormat='{0}%'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[1].Time, StringFormat='{0:HH:mm tt}'}" FontSize="12" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+                <!-- Hour 3 -->
+                <Frame Grid.Column="2" HasShadow="True" BackgroundColor="White" CornerRadius="5">
+                    <StackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="{Binding HourlyForecast2[2].Condition.Icon, StringFormat='http:{0}'}" WidthRequest="35" HeightRequest="35" />
+                        <Label Text="{Binding HourlyForecast2[2].TemperatureCelsius, StringFormat='{0}°C'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[2].Humidity, StringFormat='{0}%'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[2].Time, StringFormat='{0:HH:mm tt}'}" FontSize="12" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+                <!-- Hour 4 -->
+                <Frame Grid.Column="3" HasShadow="True" BackgroundColor="White" CornerRadius="5">
+                    <StackLayout Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="{Binding HourlyForecast2[3].Condition.Icon, StringFormat='http:{0}'}" WidthRequest="35" HeightRequest="35" />
+                        <Label Text="{Binding HourlyForecast2[3].TemperatureCelsius, StringFormat='{0}°C'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[3].Humidity, StringFormat='{0}%'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[3].Time, StringFormat='{0:HH:mm tt}'}" FontSize="12" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+                <!-- Hour 5 -->
+                <Frame Grid.Column="4" HasShadow="True" BackgroundColor="White" CornerRadius="5">
+                    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="{Binding HourlyForecast2[4].Condition.Icon, StringFormat='http:{0}'}" WidthRequest="35" HeightRequest="35" />
+                        <Label Text= "{Binding HourlyForecast2[4].TemperatureCelsius, StringFormat='{0}°C'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[4].Humidity, StringFormat='{0}%'}" FontSize="12" TextColor="Black" />
+                        <Label Text="{Binding HourlyForecast2[4].Time, StringFormat='{0:HH:mm tt}'}" FontSize="12" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
 
             </Grid>
+
         </VerticalStackLayout>
     </ContentPage>
 
