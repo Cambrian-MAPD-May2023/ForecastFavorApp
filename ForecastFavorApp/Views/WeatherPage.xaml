@@ -1,4 +1,4 @@
-﻿<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿    <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:viewmodel="clr-namespace:ForecastFavorApp.ViewModels"
             x:Class="ForecastFavorApp.Views.WeatherPage"
@@ -17,9 +17,8 @@
     </NavigationPage.TitleView>
 
     <!-- Today's Weather Tab -->
-    <ContentPage  Title="Today" BackgroundColor="#606cf2">
+    <ContentPage  Title="Today" BackgroundColor="White">
         
-
         <VerticalStackLayout>
             <!--<Frame Margin=" 20">
                 <Grid ColumnSpacing="5">
@@ -33,6 +32,7 @@
                     <Button Text="Fetch" Grid.Column="1" Command="{Binding FetchWeatherInformationCommand}"/>
                 </Grid>
             </Frame>--> 
+           <Label HorizontalOptions="Center" FontSize="15" TextColor="Black" FontAttributes="Bold" Text="{Binding LocationOutput}" Margin="0,10,0,0"/>
             <Image WidthRequest="100" HeightRequest="100" Source="{Binding WeatherIcon}" />
             <Label HorizontalOptions="Center" FontSize="25" TextColor="Black" FontAttributes="Bold" Text="{Binding WeatherDescription}"/>
             <Label HorizontalOptions="Center" FontSize="40" TextColor="Black" Text="{Binding Temperature}"/>
@@ -44,20 +44,20 @@
                 </Grid.ColumnDefinitions>
                 <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
-                        <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Humidity" HorizontalOptions="Center" TextColor="#606cf2"/>
+                        <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Cloud" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
-                        <Label Text="{Binding PrecipitationMm}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Precipitation" HorizontalOptions="Center" TextColor="#606cf2"/>
+                        <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Humidity" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="2" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
-                        <Label Text="{Binding Wind}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Wind" HorizontalOptions="Center" TextColor="#606cf2"/>
+                        <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
+                        <Label Text="Is Day" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
