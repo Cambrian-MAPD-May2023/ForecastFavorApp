@@ -33,19 +33,19 @@
                 <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding CloudCoverLevel}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Cloud" HorizontalOptions="Center"/>
+                        <Label Text="Cloud"  HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding Humidity}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Humidity" HorizontalOptions="Center"/>
+                        <Label Text="Humidity"  HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
                     </VerticalStackLayout>
                 </Frame>
                 <Frame Grid.Column="2" HasShadow="False" BorderColor="Transparent">
                     <VerticalStackLayout>
                         <Label Text="{Binding IsDay}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
-                        <Label Text="Is Day" HorizontalOptions="Center"/>
+                        <Label Text="Is Day" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
                     </VerticalStackLayout>
                 </Frame>
             </Grid>
@@ -637,6 +637,7 @@
 
                     <!-- Temperature and Humidity for Day 1 -->
                     <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding TodayDayOfWeek}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[0].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[0].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                     </StackLayout>
@@ -663,6 +664,7 @@
 
                     <!-- Temperature and Humidity for Day 2 -->
                     <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding TomorrowDayOfWeek}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[1].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[1].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                     </StackLayout>
@@ -689,6 +691,7 @@
 
                     <!-- Temperature and Humidity for Day 3 -->
                     <StackLayout Grid.Column="2" Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding DayAfterTomorrowDayOfWeek}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[2].AvgTempC, StringFormat='Temp:{0:0}°C / '}" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                         <Label Text="{Binding ThreeDayForecastDetails[2].AvgHumidity, StringFormat='Hum:{0:0}%' }" FontSize="Medium" TextColor="#606cf2" FontAttributes="Bold"/>
                     </StackLayout>

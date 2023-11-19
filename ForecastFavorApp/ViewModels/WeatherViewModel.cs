@@ -21,6 +21,7 @@ namespace ForecastFavorApp.ViewModels
         public WeatherViewModel()
         {
             _weatherService = new WeatherService();
+            CurrentDate = DateTime.Now;
         }
 
         // Observable properties that the UI can bind to. They will notify the UI when their values change.
@@ -108,7 +109,15 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private DateTime currentDate;
 
-       
+        [ObservableProperty]
+        private string todayDayOfWeek;
+
+        [ObservableProperty]
+        private string tomorrowDayOfWeek;
+
+        [ObservableProperty]
+        private string dayAfterTomorrowDayOfWeek;
+
 
         [ObservableProperty]
         private ObservableCollection<ForecastDayDetail> threeDayForecastDetails; // Collection of detailed forecasts for the next three days.
@@ -173,7 +182,16 @@ namespace ForecastFavorApp.ViewModels
                 // Extract and store the hourly forecast for the third day.
                 HourlyForecast3 = new ObservableCollection<ForecastHour>(weatherData.Forecast.ForecastDay[2].Hour);
 
+                // Variables to hold the day of the week for each of the three days
+                string dayOfWeekToday = CurrentDate.DayOfWeek.ToString();
+                string dayOfWeekTomorrow = CurrentDate.AddDays(1).DayOfWeek.ToString();
+                string dayOfWeekDayAfterTomorrow = CurrentDate.AddDays(2).DayOfWeek.ToString();
 
+                // Assign these variables to the ViewModel if you want to display them
+                // This assumes that you have properties in your ViewModel like TodayDayOfWeek, TomorrowDayOfWeek, etc.
+                TodayDayOfWeek = dayOfWeekToday;
+                TomorrowDayOfWeek = dayOfWeekTomorrow;
+                DayAfterTomorrowDayOfWeek = dayOfWeekDayAfterTomorrow;
 
 
             }
