@@ -123,6 +123,13 @@ namespace ForecastFavorApp.ViewModels
 
 
         [ObservableProperty]
+        private string tomorrowDate;
+
+        [ObservableProperty]
+        private string tomorrowTempRange;
+
+
+        [ObservableProperty]
         private ObservableCollection<ForecastDayDetail> threeDayForecastDetails; // Collection of detailed forecasts for the next three days.
 
         [ObservableProperty]
@@ -160,6 +167,7 @@ namespace ForecastFavorApp.ViewModels
                 TomorrowWeatherIcon = "http:" + TomorrowForecast.Condition.Icon;
                 TomorrowWeatherDescription = TomorrowForecast.Condition.Text;
                 TomorrowHumidity = $"{TomorrowForecast.AvgHumidity}%";
+                TomorrowTempRange = $"{TomorrowForecast.MinTempC}°C / {TomorrowForecast.MaxTempC}°C";
 
                 // 2nd Day's weather forecast assignments
                 SecondDayForecast = weatherData.Forecast.ForecastDay[1].Day;
@@ -190,6 +198,7 @@ namespace ForecastFavorApp.ViewModels
                 string dayOfWeekTomorrow = CurrentDate.AddDays(1).DayOfWeek.ToString();
                 string dayOfWeekDayAfterTomorrow = CurrentDate.AddDays(2).DayOfWeek.ToString();
                 string dayOfWeekDayAfterAfterTomorrow = CurrentDate.AddDays(3).DayOfWeek.ToString();
+                string tomorrowDate = CurrentDate.AddDays(1).Date.ToString("MMMM dd");
 
                 // Assign these variables to the ViewModel if you want to display them
                 // This assumes that you have properties in your ViewModel like TodayDayOfWeek, TomorrowDayOfWeek, etc.
@@ -197,7 +206,7 @@ namespace ForecastFavorApp.ViewModels
                 TomorrowDayOfWeek = dayOfWeekTomorrow;
                 DayAfterTomorrowDayOfWeek = dayOfWeekDayAfterTomorrow;
                 DayAfterAfterTomorrowDayOfWeek = dayOfWeekDayAfterAfterTomorrow;
-
+                TomorrowDate = tomorrowDate;
 
             }
         }
