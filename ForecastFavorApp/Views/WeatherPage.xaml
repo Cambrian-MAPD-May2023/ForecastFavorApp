@@ -626,10 +626,10 @@
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding TomorrowDayOfWeek}" Margin="0,10,0,0"/>
                         <Grid Margin="20" ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                                 <VerticalStackLayout>
@@ -676,10 +676,10 @@
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding DayAfterTomorrowDayOfWeek}" Margin="0,10,0,0"/>
                         <Grid Margin="20" ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                                 <VerticalStackLayout>
@@ -723,10 +723,10 @@
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding DayAfterAfterTomorrowDayOfWeek}" Margin="0,10,0,0"/>
                         <Grid Margin="20" ColumnSpacing="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
                                 <VerticalStackLayout>
