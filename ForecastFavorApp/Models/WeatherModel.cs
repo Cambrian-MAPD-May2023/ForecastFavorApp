@@ -86,6 +86,12 @@ namespace ForecastFavorApp.Models
         [JsonPropertyName("avghumidity")]
         public double AvgHumidity { get; set; }
 
+        [JsonPropertyName("daily_chance_of_rain")]
+        public double dailyChanceOfRain { get; set; }
+
+        [JsonPropertyName("daily_chance_of_snow")]
+        public double dailyChanceOfSnow { get; set; }
+
         [JsonPropertyName("condition")]
         public Condition Condition { get; set; }
 

@@ -50,6 +50,37 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\humidity.png" />
+	  <MauiImage Remove="Resources\Images\rain.png" />
+	  <MauiImage Remove="Resources\Images\snow.png" />
+	  <MauiImage Remove="Resources\Images\temp.png" />
+	  <MauiImage Remove="Resources\Images\wind.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Images\humidity.png" />
+	  <None Remove="Resources\Images\rain.png" />
+	  <None Remove="Resources\Images\snow.png" />
+	  <None Remove="Resources\Images\temp.png" />
+	  <None Remove="Resources\Images\wind.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\humidity.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Images\rain.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Images\snow.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Images\temp.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Images\wind.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />

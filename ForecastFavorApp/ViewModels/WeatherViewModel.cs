@@ -118,6 +118,9 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private string dayAfterTomorrowDayOfWeek;
 
+        [ObservableProperty]
+        private string dayAfterAfterTomorrowDayOfWeek;
+
 
         [ObservableProperty]
         private ObservableCollection<ForecastDayDetail> threeDayForecastDetails; // Collection of detailed forecasts for the next three days.
@@ -186,12 +189,14 @@ namespace ForecastFavorApp.ViewModels
                 string dayOfWeekToday = CurrentDate.DayOfWeek.ToString();
                 string dayOfWeekTomorrow = CurrentDate.AddDays(1).DayOfWeek.ToString();
                 string dayOfWeekDayAfterTomorrow = CurrentDate.AddDays(2).DayOfWeek.ToString();
+                string dayOfWeekDayAfterAfterTomorrow = CurrentDate.AddDays(3).DayOfWeek.ToString();
 
                 // Assign these variables to the ViewModel if you want to display them
                 // This assumes that you have properties in your ViewModel like TodayDayOfWeek, TomorrowDayOfWeek, etc.
                 TodayDayOfWeek = dayOfWeekToday;
                 TomorrowDayOfWeek = dayOfWeekTomorrow;
                 DayAfterTomorrowDayOfWeek = dayOfWeekDayAfterTomorrow;
+                DayAfterAfterTomorrowDayOfWeek = dayOfWeekDayAfterAfterTomorrow;
 
 
             }
