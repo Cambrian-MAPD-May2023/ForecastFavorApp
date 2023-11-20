@@ -598,13 +598,13 @@
 
 
     <!-- 3-Day Forecast Tab -->
-    <ContentPage Title="3-Day" BackgroundColor="#606cf2">
+    <ContentPage Title="3-Day" BackgroundColor="White">
 
         <ScrollView Orientation="Vertical" BackgroundColor="Transparent">
             <StackLayout>
-
+                <Label Text="3-Day Forecast" Margin="20" HorizontalOptions="Start" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
                 <!-- Day 1 Forecast -->
-                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="#d4e3fc">
 
                     <VerticalStackLayout>
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding TomorrowDayOfWeek}" Margin="0,10,0,0"/>
@@ -615,28 +615,28 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Frame Grid.Column="0" HasShadow="False" BorderColor="Transparent">
+                            <Frame Grid.Column="0" HasShadow="False">
                                 <VerticalStackLayout>
                                     <Image Source="rain.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Center" />
                                     <Label Text="{Binding ThreeDayForecastDetails[0].dailyChanceOfRain, StringFormat='{0:0}%'}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
 
                                 </VerticalStackLayout>
                             </Frame>
-                            <Frame Grid.Column="1" HasShadow="False" BorderColor="Transparent">
+                            <Frame Grid.Column="1" HasShadow="False">
                                 <VerticalStackLayout>
                                     <Image Source="temp.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Center" />
                                     <Label Text="{Binding ThreeDayForecastDetails[0].AvgTempC, StringFormat='{0:0}°C'}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
 
                                 </VerticalStackLayout>
                             </Frame>
-                            <Frame Grid.Column="2" HasShadow="False" BorderColor="Transparent">
+                            <Frame Grid.Column="2" HasShadow="False">
                                 <VerticalStackLayout>
                                     <Image Source="humidity.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Center" />
                                     <Label Text="{Binding ThreeDayForecastDetails[0].AvgHumidity, StringFormat='{0:0}%'}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
 
                                 </VerticalStackLayout>
                             </Frame>
-                            <Frame Grid.Column="3" HasShadow="False" BorderColor="Transparent">
+                            <Frame Grid.Column="3" HasShadow="False">
                                 <VerticalStackLayout>
                                     <Image Source="wind.png" WidthRequest="30" HeightRequest="30" HorizontalOptions="Center" />
                                     <Label Text="{Binding ThreeDayForecastDetails[0].MaxWindKph, StringFormat='{0:0}kph'}" HorizontalOptions="Center" FontSize="15" TextColor="#606cf2" FontAttributes="Bold"/>
@@ -647,6 +647,11 @@
 
                         <Image WidthRequest="60" HeightRequest="60" Source="{Binding TomorrowWeatherIcon}" />
                         <Label HorizontalOptions="Center" FontSize="Small" TextColor="Black" FontAttributes="Bold" Text="{Binding ThreeDayForecastDetails[0].Condition.Text}" Margin="0,10,0,0"/>
+                        <Frame Grid.Row="1" BackgroundColor="White" Margin="0,20,0,0">
+                            <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Snowy day ahead. Make outdoor plans accordingly." HorizontalOptions="Center" FontSize="Small" TextColor="Gray"/>
+                            </StackLayout>
+                        </Frame>
                     </VerticalStackLayout>
                 </Frame>
 
@@ -654,7 +659,7 @@
 
                 <!-- Day 2 Forecast (Similar structure, update bindings) -->
 
-                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="#d4e3fc">
 
                     <VerticalStackLayout>
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding DayAfterTomorrowDayOfWeek}" Margin="0,10,0,0"/>
@@ -697,11 +702,16 @@
 
                         <Image WidthRequest="60" HeightRequest="60" Source="{Binding SecondDayWeatherIcon}" />
                         <Label HorizontalOptions="Center" FontSize="Small" TextColor="Black" FontAttributes="Bold" Text="{Binding ThreeDayForecastDetails[1].Condition.Text}" Margin="0,10,0,0"/>
+                        <Frame Grid.Row="1" BackgroundColor="White" Margin="0,20,0,0">
+                            <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Snowy day ahead. Make outdoor plans accordingly." HorizontalOptions="Center" FontSize="Small" TextColor="Gray"/>
+                            </StackLayout>
+                        </Frame>
                     </VerticalStackLayout>
                 </Frame>
 
                 <!-- Day 3 Forecast (Similar structure, update bindings) -->
-                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="White">
+                <Frame Margin="10" Padding="10" CornerRadius="10" BackgroundColor="#d4e3fc">
 
                     <VerticalStackLayout>
                         <Label HorizontalOptions="Center" FontSize="Medium" TextColor="Black" FontAttributes="Bold" Text="{Binding DayAfterAfterTomorrowDayOfWeek}" Margin="0,10,0,0"/>
@@ -744,6 +754,11 @@
 
                         <Image WidthRequest="60" HeightRequest="60" Source="{Binding ThirdDayWeatherIcon}" />
                         <Label HorizontalOptions="Center" FontSize="Small" TextColor="Black" FontAttributes="Bold" Text="{Binding ThreeDayForecastDetails[2].Condition.Text}" Margin="0,10,0,0"/>
+                        <Frame Grid.Row="1" BackgroundColor="White" Margin="0,20,0,0">
+                            <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Snowy day ahead. Make outdoor plans accordingly." HorizontalOptions="Center" FontSize="Small" TextColor="Gray"/>
+                            </StackLayout>
+                        </Frame>
                     </VerticalStackLayout>
                 </Frame>
             </StackLayout>
