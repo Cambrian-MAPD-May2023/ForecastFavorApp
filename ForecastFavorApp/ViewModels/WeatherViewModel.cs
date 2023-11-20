@@ -7,24 +7,33 @@ using ForecastFavorApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using static CoreFoundation.DispatchSource;
+using System.Text.RegularExpressions;
 
 // Did code reveiew - Sreenath
 
 namespace ForecastFavorApp.ViewModels
 {
-    // The WeatherViewModel class, which inherits from ObservableObject, allows the UI to be notified of property changes.
+    /// <summary>
+    /// The WeatherViewModel class, responsible for handling the UI logic for weather data presentation.
+    /// It inherits from ObservableObject to enable UI updates through data binding.
+    /// </summary>
     internal partial class WeatherViewModel : ObservableObject
     {
-        private readonly WeatherService _weatherService; // Service for fetching weather data.
+        // Private field to hold the weather service instance.
+        private readonly WeatherService _weatherService;
 
-        // Constructor initializes a new instance of the WeatherService.
+        /// <summary>
+        /// Initializes a new instance of the WeatherViewModel class.
+        /// </summary>
         public WeatherViewModel()
         {
+            // Instantiates the weather service to fetch weather data.
             _weatherService = new WeatherService();
-            CurrentDate = DateTime.Now;
+            CurrentDate = DateTime.Now;// Sets the current date.
         }
 
-        // Observable properties that the UI can bind to. They will notify the UI when their values change.
+        // Observable properties. These properties are bound to the UI and notify it of any changes to their values.
         [ObservableProperty]
         private string locationInput; // Input for the location to get weather information for.
 
@@ -107,27 +116,29 @@ namespace ForecastFavorApp.ViewModels
         private ForecastDayDetail thirdDayForecast; // Detailed forecast for the third day.
 
         [ObservableProperty]
-        private DateTime currentDate;
-
-        [ObservableProperty]
-        private string todayDayOfWeek;
-
-        [ObservableProperty]
-        private string tomorrowDayOfWeek;
-
-        [ObservableProperty]
-        private string dayAfterTomorrowDayOfWeek;
-
-        [ObservableProperty]
-        private string dayAfterAfterTomorrowDayOfWeek;
+        private DateTime currentDate; // Holds the current date. It is automatically set to the current system date upon initialization of the ViewModel.
 
 
         [ObservableProperty]
-        private string tomorrowDate;
+        private string todayDayOfWeek;// Represents the day of the week for the current date as a string. This is useful for displaying today's day name in the UI.
+
+        [ObservableProperty]
+        private string tomorrowDayOfWeek; // Contains the day of the week for the day following the current date. This property can be used to display the name of the next day in the UI.
+
+
+        [ObservableProperty]
+        private string dayAfterTomorrowDayOfWeek;// Stores the day of the week for two days after the current date, allowing the UI to display "the day after tomorrow's" day name.
+
+        [ObservableProperty]
+        private string dayAfterAfterTomorrowDayOfWeek; // Holds the day of the week for three days after the current date, enabling the UI to show the name of this future day
+
+
+        [ObservableProperty]
+        private string tomorrowDate;// Contains the date for the day following the current date in a string format, often used for displaying the date in a user-friendly format.
 
         [ObservableProperty]
         private string tomorrowTempRange;
-
+        // Contains the date for the day following the current date in a string format, often used for displaying the date in a user-friendly format.
 
         [ObservableProperty]
         private ObservableCollection<ForecastDayDetail> threeDayForecastDetails; // Collection of detailed forecasts for the next three days.
@@ -139,18 +150,19 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<ForecastHour> hourlyForecast3; // Collection of hourly forecast data for the third day
 
-        // Relay Command attribute that defines an asynchronous method for fetching weather information.
+        /// <summary>
+        /// Asynchronously fetches weather information based on the user's location input.
+        /// </summary>
         [RelayCommand]
         public async Task FetchWeatherInformation()
         {
-            // Calls the weather service to get weather information for the next three days.
+            // Default location to "Sudbury" if no input is given.
             if (string.IsNullOrWhiteSpace(LocationInput)) {
 
                 LocationInput = "Sudbury";
             }
-
+            // Calls the weather service to retrieve weather data.
             var weatherData = await _weatherService.GetWeatherInformation(LocationInput, 3);
-            //var weatherData = await _weatherService.GetWeatherInformation(LocationInput, 3);
             if (weatherData?.Forecast?.ForecastDay != null && weatherData.Forecast.ForecastDay.Count >= 3)
             {
                 // If the data is successfully retrieved, assigns values to the ViewModel properties.
@@ -189,6 +201,7 @@ namespace ForecastFavorApp.ViewModels
                 ThirdDayWeatherDescription = ThirdDayForecast.Condition.Text;
                 ThirdDayHumidity = $"{ThirdDayForecast.AvgHumidity}%";
 
+                // Initializes the ThreeDayForecastDetails collection with forecast details for the next three days.
                 ThreeDayForecastDetails = new ObservableCollection<ForecastDayDetail>(
                   weatherData.Forecast.ForecastDay.Take(3).Select(fd => fd.Day));
 
@@ -206,8 +219,7 @@ namespace ForecastFavorApp.ViewModels
                 string dayOfWeekDayAfterAfterTomorrow = CurrentDate.AddDays(3).DayOfWeek.ToString();
                 string tomorrowDate = CurrentDate.AddDays(1).Date.ToString("MMMM dd");
 
-                // Assign these variables to the ViewModel if you want to display them
-                // This assumes that you have properties in your ViewModel like TodayDayOfWeek, TomorrowDayOfWeek, etc.
+                // Assigning the formatted day names to the respective observable properties.
                 TodayDayOfWeek = dayOfWeekToday;
                 TomorrowDayOfWeek = dayOfWeekTomorrow;
                 DayAfterTomorrowDayOfWeek = dayOfWeekDayAfterTomorrow;
