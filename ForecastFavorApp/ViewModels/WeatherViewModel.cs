@@ -7,8 +7,7 @@ using ForecastFavorApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using static CoreFoundation.DispatchSource;
-using System.Text.RegularExpressions;
+
 
 // Did code reveiew - Sreenath
 
