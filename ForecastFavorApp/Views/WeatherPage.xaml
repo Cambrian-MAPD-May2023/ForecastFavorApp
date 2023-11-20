@@ -763,12 +763,13 @@
                 </Frame>
             </StackLayout>
         </ScrollView>
-
-
     </ContentPage>
-
-
-
+    <ContentPage Title="Alerts" BackgroundColor="White">
+        <Label Text="Alerts and Notifications" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
+    </ContentPage>
+    <ContentPage Title="Profile" BackgroundColor="White">
+        <Label Text="User Profile and Preferences" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
+    </ContentPage>
 </TabbedPage>
 
 
