@@ -144,7 +144,13 @@ namespace ForecastFavorApp.ViewModels
         public async Task FetchWeatherInformation()
         {
             // Calls the weather service to get weather information for the next three days.
+            if (string.IsNullOrWhiteSpace(LocationInput)) {
+
+                LocationInput = "Sudbury";
+            }
+
             var weatherData = await _weatherService.GetWeatherInformation(LocationInput, 3);
+            //var weatherData = await _weatherService.GetWeatherInformation(LocationInput, 3);
             if (weatherData?.Forecast?.ForecastDay != null && weatherData.Forecast.ForecastDay.Count >= 3)
             {
                 // If the data is successfully retrieved, assigns values to the ViewModel properties.
