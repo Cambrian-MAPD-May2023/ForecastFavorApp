@@ -768,37 +768,87 @@
 
     <!-- Alerts ContentPage -->
     <ContentPage Title="Alerts" BackgroundColor="White">
-    <StackLayout Margin="20, 20, 20, 20">
-        <Label Text="Alerts and Notifications" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
+        <StackLayout Margin="20, 20, 20, 20">
+            <Label Text="Alerts and Notifications" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
 
-        <StackLayout Orientation="Horizontal" Margin="0,20,0,10" VerticalOptions="Center">
-            <Label Text="Storm Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-            <Switch x:Name="StormSwitch" HorizontalOptions="End"/>
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,10" VerticalOptions="Center">
+                <Label Text="Storm Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
+                <Switch x:Name="StormSwitch" HorizontalOptions="End"/>
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
+                <Label Text="Sunny Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
+                <Switch x:Name="SunnyDaySwitch" HorizontalOptions="End"/>
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
+
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
+                <Label Text="Rainy Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
+                <Switch x:Name="RainyDaySwitch" HorizontalOptions="End"/>
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
-
-        <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
-
-        <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
-            <Label Text="Sunny Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-            <Switch x:Name="SunnyDaySwitch" HorizontalOptions="End"/>
-        </StackLayout>
-
-        <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
-
-        <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
-            <Label Text="Rainy Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-            <Switch x:Name="RainyDaySwitch" HorizontalOptions="End"/>
-        </StackLayout>
-
-        <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
-    </StackLayout>
-</ContentPage>
-
-
-
-    <ContentPage Title="Profile" BackgroundColor="White">
-        <Label Text="User Profile and Preferences" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
     </ContentPage>
+
+    <!-- Profile ContentPage -->
+    <ContentPage Title="Profile" BackgroundColor="White">
+        <StackLayout Margin="20,20,20,20">
+            <Label Text="User Profile and Preferences" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
+            <Image Source="profile_icon.png" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="0,20,0,0"/>
+            <Label Text="John Doe" HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Black" Margin="0,10,0,20"/>
+            <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                <!-- Measurement Unit -->
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label Text="Measurement Unit:" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="Black"/>
+                    <Picker Title="Select Unit" HorizontalOptions="StartAndExpand" WidthRequest="200" VerticalOptions="CenterAndExpand">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Celcius</x:String>
+                                <x:String>Fahrenheit</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </StackLayout>
+
+                <!-- Theme Selection -->
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label Text="Theme Selection:" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="Black"/>
+                    <Picker Title="Select Theme" HorizontalOptions="StartAndExpand" WidthRequest="200" VerticalOptions="CenterAndExpand" Margin="15,0,0,0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Light Theme</x:String>
+                                <x:String>Dark Theme</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </StackLayout>
+            </StackLayout>
+            <!-- Saved Location -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Saved Locations" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" Margin="0,20,0,0"/>
+            </StackLayout>
+            <!-- Editable Text Fields -->
+            <StackLayout Orientation="Vertical" Spacing="10">
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Entry Placeholder="Location 1" IsEnabled="False" WidthRequest="300"/>
+                    <Button Text="Edit"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Entry Placeholder="Location 2" IsEnabled="False" WidthRequest="300"/>
+                    <Button Text="Edit"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Entry Placeholder="Location 3" IsEnabled="False" WidthRequest="300"/>
+                    <Button Text="Edit"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage>
+
 </TabbedPage>
 
 

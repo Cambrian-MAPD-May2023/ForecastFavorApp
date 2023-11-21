@@ -71,6 +71,7 @@
 	  <None Remove="Resources\Images\snow.png" />
 	  <None Remove="Resources\Images\temp.png" />
 	  <None Remove="Resources\Images\wind.png" />
+	  <None Remove="Resources\Images\profile_icon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,4 +85,7 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\profile_icon.png" />
+	</ItemGroup>
 </Project>
