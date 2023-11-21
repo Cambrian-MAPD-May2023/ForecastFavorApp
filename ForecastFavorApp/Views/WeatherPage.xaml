@@ -799,7 +799,7 @@
         <StackLayout Margin="20,20,20,20">
             <Label Text="User Profile and Preferences" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
             <Image Source="profile_icon.png" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="0,20,0,0"/>
-            <Label Text="John Doe" HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Black" Margin="0,10,0,20"/>
+            <Entry Placeholder="Enter your name" HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Black" Margin="0,10,0,20" HorizontalTextAlignment="Center"/>
             <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
                 <!-- Measurement Unit -->
                 <StackLayout Orientation="Horizontal" Spacing="10">
@@ -844,6 +844,9 @@
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Entry Placeholder="Location 3" IsEnabled="False" WidthRequest="300"/>
                     <Button Text="Edit"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Update"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
