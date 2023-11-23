@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,45 +21,28 @@ namespace ForecastFavorApp.Models
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
+        public string Username { get; set; } // Username for identifying the user.
 
-        public List<string> SavedLocations { get; set; } = new List<string>();
+        // Saved locations as individual properties for easy binding.
+        public string Location1 { get; set; }
+        public string Location2 { get; set; }
+        public string Location3 { get; set; }
 
+        // Store the temperature unit preference as a boolean
         public bool IsCelsius { get; set; } = true;
 
-
+        // Theme preference
         public AppTheme Theme { get; set; } = AppTheme.Light;
 
-
-        public List<NotificationType> NotificationPreferences { get; set; } = new List<NotificationType>();
-    }
-    /// <summary>
-    /// Enumerates the possible themes for the app's appearance.
-    /// </summary>
-    public enum AppTheme
-    {
-        Light,
-        Dark
-
-    }
-    /// <summary>
-    /// Enumerates the types of weather notifications a user can opt to receive.
-    /// 
-    /// Values:
-    /// - RainyDay: Notification for rainy days.
-    /// - SunnyDay: Notification for sunny days.
-    /// - StormAlert: Notification for stormy weather.
-    /// - CloudyDay: Notification for cloudy days.
-    /// - WindyDay: Notification for windy days.
-    /// - SnowyDay: Notification for snowy days.
-    /// </summary>
-    public enum NotificationType
-    {
-        RainyDay,
-        SunnyDay,
-        StormAlert,
-        CloudyDay,
-        WindyDay,
-        SnowyDay
-
+        // Notification preferences as a dictionary to store user selections for each notification type
+        public Dictionary<NotificationType, bool> NotificationPreferences { get; set; } = new Dictionary<NotificationType, bool>
+        {
+            { NotificationType.RainyDay, false },
+            { NotificationType.SunnyDay, false },
+            { NotificationType.StormAlert, false },
+            { NotificationType.CloudyDay, false },
+            { NotificationType.WindyDay, false },
+            { NotificationType.SnowyDay, false }
+        };
     }
 }
