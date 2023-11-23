@@ -806,8 +806,9 @@
                 <!-- Measurement Unit -->
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Label Text="Measurement Unit:" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="Black"/>
-                    <Picker Title="Select Unit" HorizontalOptions="StartAndExpand" WidthRequest="200"
-        VerticalOptions="CenterAndExpand" SelectedIndex="{Binding Unit, Mode=TwoWay}" TextColor="Black">
+                    <Picker Title="Select Theme" HorizontalOptions="StartAndExpand" WidthRequest="200"
+                    VerticalOptions="CenterAndExpand" Margin="15,0,0,0"
+                    SelectedItem="{Binding Unit, Mode=TwoWay}" TextColor="Black">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Celsius</x:String>
