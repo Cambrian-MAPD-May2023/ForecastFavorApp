@@ -7,6 +7,10 @@ using ForecastFavorApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using Azure.Data.Tables;
+using Azure;
+using Newtonsoft.Json;
+using Microsoft.Maui.Devices.Sensors;
 
 
 // Did code reveiew - Sreenath
@@ -22,6 +26,16 @@ namespace ForecastFavorApp.ViewModels
         // Private field to hold the weather service instance.
         private readonly WeatherService _weatherService;
 
+        [ObservableProperty]
+        private UserPreferences userPreferences;
+
+       
+        private const string UserPreferencesTableName = "userpreferences";
+        string accountName = "forecastfavorstorage";
+        string accountKey = "fZ/2jTsX0VVeFK4hZNG/ulU60TaHR3bhVmXjHCoXIp2OAuDbBmzvJzNxEz36H6UaOOeSOLItg6X8+AStyBN5VQ==";
+
+        // PreferencesViewModel Commands
+        public ICommand SaveUserPreferencesCommand { get; }
         /// <summary>
         /// Initializes a new instance of the WeatherViewModel class.
         /// </summary>
@@ -30,6 +44,17 @@ namespace ForecastFavorApp.ViewModels
             // Instantiates the weather service to fetch weather data.
             _weatherService = new WeatherService();
             CurrentDate = DateTime.Now;// Sets the current date.
+
+            // Initialize commands.
+            SaveUserPreferencesCommand = new AsyncRelayCommand<string>(SaveUserPreferencesToCloudAsync);
+
+
+        }
+
+        public async Task InitializeAsync(string username)
+        {
+            await LoadUserPreferencesAsync(username);
+            // Any other initialization logic
         }
 
         // Observable properties. These properties are bound to the UI and notify it of any changes to their values.
@@ -149,6 +174,8 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private ObservableCollection<ForecastHour> hourlyForecast3; // Collection of hourly forecast data for the third day
 
+
+
         /// <summary>
         /// Asynchronously fetches weather information based on the user's location input.
         /// </summary>
@@ -156,7 +183,8 @@ namespace ForecastFavorApp.ViewModels
         public async Task FetchWeatherInformation()
         {
             // Default location to "Sudbury" if no input is given.
-            if (string.IsNullOrWhiteSpace(LocationInput)) {
+            if (string.IsNullOrWhiteSpace(LocationInput))
+            {
 
                 LocationInput = "Sudbury";
             }
@@ -166,7 +194,7 @@ namespace ForecastFavorApp.ViewModels
             {
                 // If the data is successfully retrieved, assigns values to the ViewModel properties.
                 // Current weather data assignments
-                
+
                 WeatherIcon = "http:" + weatherData.Current.Condition.Icon;
                 Temperature = $"{weatherData.Current.TemperatureCelsius}°C / {weatherData.Current.TemperatureFahrenheit}°F";
                 WeatherDescription = weatherData.Current.Condition.Text;
@@ -176,7 +204,7 @@ namespace ForecastFavorApp.ViewModels
                 Wind = $"{weatherData.Current.WindKph}kph";
                 CloudCoverLevel = $"{weatherData.Current.Cloud}%";
                 IsDay = weatherData.Current.IsDay == 1 ? "Day" : "Night";
-              
+
 
                 // Tomorrow's weather forecast assignments
                 TomorrowForecast = weatherData.Forecast.ForecastDay[0].Day;
@@ -226,6 +254,127 @@ namespace ForecastFavorApp.ViewModels
                 TomorrowDate = tomorrowDate;
 
             }
+        }
+
+        [ObservableProperty]
+        private string unit;
+
+        [ObservableProperty]
+        private string theme;
+
+        [ObservableProperty]
+        private Dictionary<NotificationType, bool> notificationPreferences;
+
+        [ObservableProperty]
+        private string location1;
+
+        [ObservableProperty]
+        private string location2;
+
+        [ObservableProperty]
+        private string location3;
+
+        [ObservableProperty]
+        private bool stormNotificationEnabled;
+
+        [ObservableProperty]
+        private bool sunnyNotificationEnabled;
+
+        [ObservableProperty]
+        private bool rainyNotificationEnabled;
+
+       
+
+        /// <summary>
+        /// Loads the user preferences, potentially from local storage or a remote database.
+        /// </summary>
+        public async Task LoadUserPreferencesAsync(string username)
+        {
+            Uri accountUri = new Uri("https://forecastfavorstorage.table.core.windows.net");
+            var tableClient = new TableClient(accountUri, UserPreferencesTableName, new TableSharedKeyCredential(accountName, accountKey));
+            await tableClient.CreateIfNotExistsAsync();
+
+            string partitionKey = username; // Use username as the partition key to identify the user
+
+            try
+            {
+                var response = await tableClient.GetEntityAsync<TableEntity>(username, "UserPreferences");
+                if (response.Value != null)
+                {
+                    var entity = response.Value;
+
+                    // Load individual locations from separate columns
+                    Location1 = entity.GetString("Location1");
+                    Location2 = entity.GetString("Location2");
+                    Location3 = entity.GetString("Location3");
+
+                    // Assuming these fields exist in your table storage
+                    StormNotificationEnabled = entity.GetBoolean("StormNotificationEnabled") ?? false;
+                    SunnyNotificationEnabled = entity.GetBoolean("SunnyNotificationEnabled") ?? false;
+                    RainyNotificationEnabled = entity.GetBoolean("RainyNotificationEnabled") ?? false;
+
+                    // Update the ViewModel properties directly from the TableEntity
+                    Unit= entity.GetString("Unit");
+                    Theme = entity.GetString("Theme");
+
+                   
+
+                   
+                    
+                }
+            }
+            catch (RequestFailedException ex) when (ex.Status == 404)
+            {
+                Unit = ""; // Default to Celsius
+                Theme = ""; // Enum value for default theme
+                Location1 = ""; // Initialize with empty string for location 1
+                Location2 = ""; // Initialize with empty string for location 2
+                Location3 = ""; // Initialize with empty string for location 3
+                StormNotificationEnabled = false; // Default to false for storm notifications
+                SunnyNotificationEnabled = false; // Default to false for sunny notifications
+                RainyNotificationEnabled = false; // Default to false for rainy notifications 
+            }
+
+            catch (Exception ex)
+            {
+                // Handle other exceptions that might occur
+                // Consider logging the exception
+            }
+        }
+
+        /// <summary>
+        /// Saves the user preferences to Azure Table Storage.
+        /// </summary>
+        public async Task SaveUserPreferencesToCloudAsync(string username)
+        {
+            // Logic to save the preferences to Azure Table Storage.
+            Uri accountUri = new Uri("https://forecastfavorstorage.table.core.windows.net");
+            var tableClient = new TableClient(accountUri, UserPreferencesTableName, new TableSharedKeyCredential(accountName, accountKey));
+            await tableClient.CreateIfNotExistsAsync();
+
+            // Collect individual locations into a list
+            var savedLocations = string.Join(",", new[] { Location1, Location2, Location3 }
+                                       .Where(location => !string.IsNullOrWhiteSpace(location)));
+
+
+            // Create the entity to save
+            var entity = new TableEntity
+            {
+                PartitionKey = username,
+                RowKey = "UserPreferences",
+                ["Unit"] = Unit.ToString(),
+                ["Theme"] = Theme.ToString(),
+                // Save individual locations into separate columns
+                ["Location1"] = Location1 ?? "", // Using ?? to handle possible null values
+                ["Location2"] = Location2 ?? "",
+                ["Location3"] = Location3 ?? "",
+                ["StormNotificationEnabled"] = StormNotificationEnabled,
+                ["SunnyNotificationEnabled"] = SunnyNotificationEnabled,
+                ["RainyNotificationEnabled"] = RainyNotificationEnabled
+            };
+
+
+            await tableClient.UpsertEntityAsync(entity, TableUpdateMode.Replace);
         }
     }
 }
