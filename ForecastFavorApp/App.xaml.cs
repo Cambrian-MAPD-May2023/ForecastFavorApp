@@ -16,32 +16,20 @@ namespace ForecastFavorApp
         {
             base.OnStart();
 
-            // Attempt to load users from the cloud database.
-            var users = await LoadUsersFromCloud();
-            if (users.Any())
+            // Use "dennis" as the default username.
+            string username = "dennis";
+
+            // Load user preferences for the default user.
+            if (MainPage is NavigationPage navigationPage)
             {
-                // If users exist, initialize the view model with the first user's preferences.
-                string defaultUsername = users.First().Username;
-                var mainPage = MainPage as NavigationPage;
-                // Make sure the current page is WeatherPage and it's loaded
-                if (mainPage?.CurrentPage is WeatherPage weatherPage)
+                if (navigationPage.CurrentPage.BindingContext is WeatherViewModel viewModel)
                 {
-                    // Get the view model from the WeatherPage
-                    if (weatherPage.BindingContext is WeatherViewModel viewModel)
-                    {
-                        await viewModel.InitializeAsync(defaultUsername);
-                    }
+                    await viewModel.LoadUserPreferencesAsync(username);
                 }
             }
-            // If no users exist, the WeatherPage will prompt for new user details.
+
         }
 
-        // Method to load users from the cloud database.
-        private async Task<IEnumerable<UserPreferences>> LoadUsersFromCloud()
-        {
-            // Implement logic to fetch user preferences from the cloud.
-            // This is a placeholder for actual cloud storage fetching logic.
-            return await Task.FromResult(Enumerable.Empty<UserPreferences>());
-        }
+        
     }
 }
