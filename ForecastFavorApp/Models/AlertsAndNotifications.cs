@@ -29,4 +29,17 @@ namespace ForecastFavorApp.Models
 
         public bool ReceiveRainyDayNotifications { get; set; } = false;
     }
+
+    // Make sure the NotificationType enum is defined in the same namespace or included via a using directive
+    public enum NotificationType
+    {
+        RainyDay,
+        SunnyDay,
+        StormAlert,
+        CloudyDay,
+        WindyDay,
+        SnowyDay,
+
+       
+    }
 }
