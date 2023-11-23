@@ -9,32 +9,57 @@ namespace ForecastFavorApp.Views
     // WeatherPage inherits from TabbedPage, representing a page with tabs in the application.
     public partial class WeatherPage : TabbedPage
     {
-        WeatherViewModel _viewModel; // ViewModel instance for the WeatherPage.
+        WeatherViewModel _viewModel;
 
-        // Constructor for the WeatherPage.
         public WeatherPage()
         {
-            InitializeComponent(); // Method call to initialize the page's components.
-            _viewModel = new WeatherViewModel(); // Instantiate the WeatherViewModel.
-            // Assign the ViewModel to the page's BindingContext to enable data binding between the View and ViewModel.
-            BindingContext = _viewModel;
+            InitializeComponent();
+            // ViewModel is not instantiated here anymore.
         }
 
-        // OnAppearing is an event handler called when the page is about to appear on the screen.
         protected override async void OnAppearing()
         {
-            base.OnAppearing(); // Call the base class implementation.
-            // Exception handling for the FetchWeatherInformation operation.
-            try
+            base.OnAppearing();
+
+            if (_viewModel == null)
             {
-                // Async method call to fetch weather information and update the ViewModel.
-                await _viewModel.FetchWeatherInformation();
-            }
-            catch (Exception ex)
-            {
-                // If an exception occurs, display an alert to the user with the error message.
-                await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+                _viewModel = new WeatherViewModel();
+                BindingContext = _viewModel;
+
+                string username = await GetUsernameAsync(); // Implement this method to retrieve the username
+                await _viewModel.InitializeAsync(username);
+
+                try
+                {
+                    await _viewModel.FetchWeatherInformation();
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
+                }
             }
         }
+
+        private async void OnSavePreferencesClicked(object sender, EventArgs e)
+        {
+            // Make sure to check for null or invalid username.
+            if (!string.IsNullOrWhiteSpace(usernameEntry.Text))
+            {
+                await _viewModel.SaveUserPreferencesToCloudAsync(usernameEntry.Text);
+            }
+            else
+            {
+                await DisplayAlert("Validation", "You must enter a username.", "OK");
+            }
+        }
+
+        // Implement this method to retrieve the username
+        private Task<string> GetUsernameAsync()
+        {
+            // You can replace this with the actual logic to obtain the username
+            // For instance, checking a local cache or prompting the user
+            return Task.FromResult("defaultUser");
+        }
     }
+
 }
