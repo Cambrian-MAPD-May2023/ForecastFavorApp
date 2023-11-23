@@ -773,21 +773,21 @@
 
             <StackLayout Orientation="Horizontal" Margin="0,20,0,10" VerticalOptions="Center">
                 <Label Text="Storm Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-                <Switch x:Name="StormSwitch" HorizontalOptions="End"/>
+                <Switch IsToggled="{Binding StormNotificationEnabled, Mode=TwoWay}" HorizontalOptions="End"/>
             </StackLayout>
 
             <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
 
-            <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,10" VerticalOptions="Center">
                 <Label Text="Sunny Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-                <Switch x:Name="SunnyDaySwitch" HorizontalOptions="End"/>
+                <Switch IsToggled="{Binding SunnyNotificationEnabled, Mode=TwoWay}" HorizontalOptions="End"/>
             </StackLayout>
 
             <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
 
-            <StackLayout Orientation="Horizontal" Margin="0,20,0,20" VerticalOptions="Center">
+            <StackLayout Orientation="Horizontal" Margin="0,20,0,10" VerticalOptions="Center">
                 <Label Text="Rainy Day Notification" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Body" TextColor="Black"/>
-                <Switch x:Name="RainyDaySwitch" HorizontalOptions="End"/>
+                <Switch IsToggled="{Binding RainyNotificationEnabled, Mode=TwoWay}" HorizontalOptions="End"/>
             </StackLayout>
 
             <BoxView HeightRequest="1" Color="Black" HorizontalOptions="FillAndExpand"/>
@@ -799,25 +799,31 @@
         <StackLayout Margin="20,20,20,20">
             <Label Text="User Profile and Preferences" HorizontalOptions="CenterAndExpand" FontSize="Title" FontFamily="Quicksand" TextColor="Black"/>
             <Image Source="profile_icon.png" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="0,20,0,0"/>
-            <Entry Placeholder="Enter your name" HorizontalOptions="CenterAndExpand" FontSize="Subtitle" TextColor="Black" Margin="0,10,0,20" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="usernameEntry" Placeholder="Enter your name" HorizontalOptions="CenterAndExpand"
+               FontSize="Subtitle" TextColor="Black" Margin="0,10,0,20" HorizontalTextAlignment="Center"
+               Text="{Binding UserPreferences.Username, Mode=TwoWay}"/>
             <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
                 <!-- Measurement Unit -->
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Label Text="Measurement Unit:" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="Black"/>
-                    <Picker Title="Select Unit" HorizontalOptions="StartAndExpand" WidthRequest="200" VerticalOptions="CenterAndExpand">
+                    <Picker Title="Select Unit" HorizontalOptions="StartAndExpand" WidthRequest="200"
+        VerticalOptions="CenterAndExpand" SelectedIndex="{Binding Unit, Mode=TwoWay}" TextColor="Black">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
-                                <x:String>Celcius</x:String>
-                                <x:String>Fahrenheit</x:String>
+                                <x:String>Celsius</x:String>
+                                <x:String>Farenheit</x:String>
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
+
                 </StackLayout>
 
                 <!-- Theme Selection -->
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <Label Text="Theme Selection:" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="Black"/>
-                    <Picker Title="Select Theme" HorizontalOptions="StartAndExpand" WidthRequest="200" VerticalOptions="CenterAndExpand" Margin="15,0,0,0">
+                    <Picker Title="Select Theme" HorizontalOptions="StartAndExpand" WidthRequest="200"
+                VerticalOptions="CenterAndExpand" Margin="15,0,0,0"
+                SelectedItem="{Binding Theme, Mode=TwoWay}" TextColor="Black">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Light Theme</x:String>
@@ -834,19 +840,18 @@
             <!-- Editable Text Fields -->
             <StackLayout Orientation="Vertical" Spacing="10">
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Entry Placeholder="Location 1" IsEnabled="False" WidthRequest="300"/>
-                    <Button Text="Edit"/>
+                    <Entry Placeholder="Location 1" Text="{Binding Location1, Mode=TwoWay}" IsEnabled="True" WidthRequest="300" TextColor="Black"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Entry Placeholder="Location 2" IsEnabled="False" WidthRequest="300"/>
-                    <Button Text="Edit"/>
+                    <Entry Placeholder="Location 2" Text="{Binding Location2, Mode=TwoWay}" IsEnabled="True" WidthRequest="300" TextColor="Black"/>
+            
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <Entry Placeholder="Location 3" IsEnabled="False" WidthRequest="300"/>
-                    <Button Text="Edit"/>
+                    <Entry Placeholder="Location 3" Text="{Binding Location3, Mode=TwoWay}" IsEnabled="True" WidthRequest="300" TextColor="Black"/>
+            
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Update"/>
+                    <Button Text="Save Preferences" Clicked="OnSavePreferencesClicked"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
