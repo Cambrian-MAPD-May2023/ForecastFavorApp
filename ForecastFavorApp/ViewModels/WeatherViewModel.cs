@@ -11,6 +11,12 @@ using Azure.Data.Tables;
 using Azure;
 using Newtonsoft.Json;
 using Microsoft.Maui.Devices.Sensors;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.AndroidOption;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.Controls.Shapes;
+using System.Linq;
+using System.Threading.Channels;
 
 
 // Did code reveiew - Sreenath
@@ -29,7 +35,7 @@ namespace ForecastFavorApp.ViewModels
         [ObservableProperty]
         private UserPreferences userPreferences;
 
-       
+
         private const string UserPreferencesTableName = "userpreferences";
         string accountName = "forecastfavorstorage";
         string accountKey = "fZ/2jTsX0VVeFK4hZNG/ulU60TaHR3bhVmXjHCoXIp2OAuDbBmzvJzNxEz36H6UaOOeSOLItg6X8+AStyBN5VQ==";
@@ -252,9 +258,57 @@ namespace ForecastFavorApp.ViewModels
                 DayAfterTomorrowDayOfWeek = dayOfWeekDayAfterTomorrow;
                 DayAfterAfterTomorrowDayOfWeek = dayOfWeekDayAfterAfterTomorrow;
                 TomorrowDate = tomorrowDate;
-
+                // After processing weather data
+                CheckAndSendNotificationsBasedOnPreferences();
             }
         }
+
+        private void CheckAndSendNotificationsBasedOnPreferences()
+        {
+            // Example: Check if it's sunny and user wants sunny notifications
+            if (WeatherDescription.Contains("Sunny") && SunnyNotificationEnabled)
+            {
+                SendNotification("Glorious Sunshine Awaits", "It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!");
+            }
+            if (WeatherDescription.Contains("rain") && RainyNotificationEnabled)
+            {
+                SendNotification("Rainy Day Alert!", "It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!");
+            }
+            if (WeatherDescription.Contains("snow") && SnowyNotificationEnabled)
+            {
+                SendNotification("Snowflakes Are Falling!", "The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.");
+            }
+            if (WeatherDescription.Contains("thunder") && StormNotificationEnabled)
+            {
+                SendNotification("Storm Brewing!", "Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.");
+            }
+            if ((WeatherDescription.Contains("Overcast") || WeatherDescription.Contains("cloud") || WeatherDescription.Contains("Fog")) && CloudyNotificationEnabled)
+            {
+                SendNotification("Overcast Skies Today", "A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.");
+            }
+
+
+        }
+
+        private void SendNotification(string title, string message)
+        {
+            var notification = new NotificationRequest
+            {
+                NotificationId = new Random().Next(),
+                Title = title,
+                Description = message,
+                ReturningData = "DetailInfo", // Custom data
+                BadgeNumber=42,
+                Schedule = new NotificationRequestSchedule
+                {
+                    NotifyTime = DateTime.Now.AddSeconds(5),
+                }
+            };
+                 LocalNotificationCenter.Current.Show(notification);
+            // Add a console print statement to confirm the notification is being sent
+            Console.WriteLine($"Notification Sent: Title='{title}', Message='{message}'");
+        }
+
 
         [ObservableProperty]
         private string unit;
@@ -281,9 +335,13 @@ namespace ForecastFavorApp.ViewModels
         private bool sunnyNotificationEnabled;
 
         [ObservableProperty]
+        private bool snowyNotificationEnabled;
+
+        [ObservableProperty]
         private bool rainyNotificationEnabled;
 
-       
+        [ObservableProperty]
+        private bool cloudyNotificationEnabled;
 
         /// <summary>
         /// Loads the user preferences, potentially from local storage or a remote database.
@@ -312,9 +370,11 @@ namespace ForecastFavorApp.ViewModels
                     StormNotificationEnabled = entity.GetBoolean("StormNotificationEnabled") ?? false;
                     SunnyNotificationEnabled = entity.GetBoolean("SunnyNotificationEnabled") ?? false;
                     RainyNotificationEnabled = entity.GetBoolean("RainyNotificationEnabled") ?? false;
+                    SnowyNotificationEnabled = entity.GetBoolean("SnowyNotificationEnabled") ?? false;
+                    CloudyNotificationEnabled = entity.GetBoolean("SnowyNotificationEnabled") ?? false;
 
                     // Update the ViewModel properties directly from the TableEntity
-                    Unit= entity.GetString("Unit");
+                    Unit = entity.GetString("Unit");
                     Theme = entity.GetString("Theme");
 
                    
@@ -333,6 +393,8 @@ namespace ForecastFavorApp.ViewModels
                 StormNotificationEnabled = false; // Default to false for storm notifications
                 SunnyNotificationEnabled = false; // Default to false for sunny notifications
                 RainyNotificationEnabled = false; // Default to false for rainy notifications 
+                SnowyNotificationEnabled = false; // Default to false for snow notifications 
+                CloudyNotificationEnabled = false; // Default to false for cloud notifications 
             }
 
             catch (Exception ex)
@@ -370,7 +432,9 @@ namespace ForecastFavorApp.ViewModels
                 ["Location3"] = Location3 ?? "",
                 ["StormNotificationEnabled"] = StormNotificationEnabled,
                 ["SunnyNotificationEnabled"] = SunnyNotificationEnabled,
-                ["RainyNotificationEnabled"] = RainyNotificationEnabled
+                ["SnowyNotificationEnabled"] = SunnyNotificationEnabled,
+                ["RainyNotificationEnabled"] = RainyNotificationEnabled,
+                ["CloudyNotificationEnabled"] = CloudyNotificationEnabled
             };
 
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1027254699996",
+    "project_id": "forecastfavorapp",
+    "storage_bucket": "forecastfavorapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027254699996:android:a00ea376ba82d1a62af119",
+        "android_client_info": {
+          "package_name": "com.companyname.forecastfavorapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRnxQ5UcQLVVN08AupSdt71w_KxjX2mmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
