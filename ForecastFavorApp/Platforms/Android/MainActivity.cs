@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.LocalNotification;
+using Android.Content;
+
 
 namespace ForecastFavorApp
 {
@@ -11,23 +14,16 @@ namespace ForecastFavorApp
         {
             base.OnCreate(savedInstanceState);
             // ...
+            LocalNotificationCenter.CreateNotificationChannel(); // This sets up the notification channel
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-            {
-                const string channelId = "default_notification_channel_id";
-                const string channelName = "Default";
-                const string channelDescription = "The default channel for notifications.";
-
-                var channel = new NotificationChannel(channelId, channelName, NotificationImportance.High)
-                {
-                    Description = channelDescription
-                };
-
-                var notificationManager = (NotificationManager)GetSystemService(NotificationService);
-                notificationManager.CreateNotificationChannel(channel);
-            }
 
             // ...
+        }
+        // Ensure this override is included to handle notification taps
+        protected override void OnNewIntent(Intent intent)
+        {
+            LocalNotificationCenter.NotifyNotificationTapped(intent);
+            base.OnNewIntent(intent);
         }
 
     }
