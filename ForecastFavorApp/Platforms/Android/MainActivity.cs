@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Plugin.LocalNotification;
 using Android.Content;
-
+using Android.Gms.Ads;
 
 namespace ForecastFavorApp
 {
@@ -16,8 +16,7 @@ namespace ForecastFavorApp
             // ...
             LocalNotificationCenter.CreateNotificationChannel(); // This sets up the notification channel
 
-
-            // ...
+            MobileAds.Initialize(this); // Initialize the MobileAds SDK, enabling the application to use AdMob services.
         }
         // Ensure this override is included to handle notification taps
         protected override void OnNewIntent(Intent intent)

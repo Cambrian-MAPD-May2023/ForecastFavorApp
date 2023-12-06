@@ -80,6 +80,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.LocalNotification" Version="10.1.8" />
+		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>

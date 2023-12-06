@@ -1,7 +1,7 @@
 using Microsoft.Maui.Controls;
 using System;
 using ForecastFavorApp.ViewModels;
-
+using Plugin.MauiMTAdmob;
 // Did code reveiew - Sreenath
 
 namespace ForecastFavorApp.Views
@@ -11,9 +11,12 @@ namespace ForecastFavorApp.Views
     {
         WeatherViewModel _viewModel;
 
+
         public WeatherPage()
         {
             InitializeComponent();
+            InitializeAdMob();
+
             // ViewModel is not instantiated here anymore.
         }
 
@@ -59,6 +62,13 @@ namespace ForecastFavorApp.Views
             // You can replace this with the actual logic to obtain the username
             // For instance, checking a local cache or prompting the user
             return Task.FromResult("defaultUser");
+        }
+        // Initializes AdMob settings, including user consent for personalized ads, AdMob IDs for testing,and setting the AdsId for the AdMob banner.
+        private void InitializeAdMob()
+        {
+            CrossMauiMTAdmob.Current.UserPersonalizedAds = true;
+            CrossMauiMTAdmob.Current.AdsId = "ca-app-pub-3940256099942544~3347511713";
+            AdmobBanner.AdsId = "ca-app-pub-6602238885009424/7858846128";
         }
     }
 

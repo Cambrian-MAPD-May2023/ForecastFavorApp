@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
+using Plugin.MauiMTAdmob;
 
 namespace ForecastFavorApp
 {
@@ -11,6 +12,7 @@ namespace ForecastFavorApp
             builder
                 .UseMauiApp<App>()
                 .UseLocalNotification()
+                .UseMauiMTAdmob()      // Enable integration with MTAdMob for AdMob services
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -1,6 +1,7 @@
 ﻿<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:viewmodel="clr-namespace:ForecastFavorApp.ViewModels"
+            xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
             x:Class="ForecastFavorApp.Views.WeatherPage"
             x:DataType="viewmodel:WeatherViewModel"
             BackgroundColor="#606cf2">
@@ -302,6 +303,14 @@
                             </StackLayout>
                         </Frame>
                     </Grid>
+                    <!-- AdMob Banner Ad -->
+                     <controls:MTAdView x:Name="AdmobBanner">
+                        <controls:MTAdView.HeightRequest>
+                            <x:OnIdiom >
+                                <x:OnIdiom.Phone>50</x:OnIdiom.Phone>
+                            </x:OnIdiom>
+                        </controls:MTAdView.HeightRequest>
+                    </controls:MTAdView>
                 </StackLayout>
             </ScrollView>
         </VerticalStackLayout>
@@ -336,7 +345,8 @@
             <Rectangle Fill="Transparent"
                    HeightRequest="300"
                    WidthRequest="300" />
-
+            
+           
             <!-- Hourly Forecast Grid for Tomorrow -->
             <ScrollView Orientation="Horizontal" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="End">
                 <StackLayout Orientation="Horizontal">

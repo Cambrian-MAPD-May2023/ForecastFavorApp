@@ -334,5 +334,9 @@ namespace ForecastFavorApp.Models
         [JsonPropertyName("gb-defra-index")]
         public int GBDEFRAIndex { get; set; }
     }
+    public class MTAdView : ContentView
+    {
+        public string AdUnitId { get; set; }
+    }
 
 }
