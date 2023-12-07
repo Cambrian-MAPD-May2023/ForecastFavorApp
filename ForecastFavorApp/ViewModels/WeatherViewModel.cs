@@ -330,94 +330,51 @@ namespace ForecastFavorApp.ViewModels
             }
 
         }
+        
         private void WeatherNotificationLabel()
         {
-            string forecastText0 = GetForecastText(0); 
+            string forecastText0 = GetForecastText(0);
             string forecastText1 = GetForecastText(1);
             string forecastText2 = GetForecastText(2);
+
             // WeatherNotification0
-            switch (true)
-            {
-                case var _ when ContainsPartialMatch(forecastText0, "Sunny", "sun"):
-                    WeatherNotification0 = "Glorious Sunshine Awaits. It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!";
-                    break;
+            WeatherNotification0 = GetWeatherNotificationText(forecastText0);
 
-                case var _ when ContainsPartialMatch(forecastText0, "rain"):
-                    WeatherNotification0 = "Rainy Day Alert! It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText0, "snow"):
-                    WeatherNotification0 = "Snowflakes Are Falling! The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText0, "Overcast", "cloud", "Fog"):
-                    WeatherNotification0 = "Overcast Skies Today A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.";
-                    break;
-                case var _ when ContainsPartialMatch(forecastText0, "thunder"):
-                    WeatherNotification0 = "Storm Brewing! Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.";
-                    break;
-
-                default:
-                    WeatherNotification0 = WeatherDescription;
-                    break;
-            }
             // WeatherNotification1
-            switch (true)
-            {
-                case var _ when ContainsPartialMatch(forecastText1, "Sunny", "sun"):
-                    WeatherNotification1 = "Glorious Sunshine Awaits. It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText1, "rain"):
-                    WeatherNotification1 = "Rainy Day Alert! It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText1, "snow"):
-                    WeatherNotification1 = "Snowflakes Are Falling! The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText1, "Overcast", "cloud", "Fog"):
-                    WeatherNotification1 = "Overcast Skies Today A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText1, "thunder"):
-                    WeatherNotification1 = "Storm Brewing! Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.";
-                    break;
-
-                default:
-                    WeatherNotification1 = WeatherDescription;
-                    break;
-            }
+            WeatherNotification1 = GetWeatherNotificationText(forecastText1);
 
             // WeatherNotification2
-            switch (true)
-            {
-                case var _ when ContainsPartialMatch(forecastText2, "Sunny", "sun"):
-                    WeatherNotification2 = "Glorious Sunshine Awaits. It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!";
-                    break;
+            WeatherNotification2 = GetWeatherNotificationText(forecastText2);
 
-                case var _ when ContainsPartialMatch(forecastText2, "rain"):
-                    WeatherNotification2 = "Rainy Day Alert! It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText2, "snow"):
-                    WeatherNotification2 = "Snowflakes Are Falling! The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText2, "Overcast", "cloud", "Fog"):
-                    WeatherNotification2 = "Overcast Skies Today A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.";
-                    break;
-
-                case var _ when ContainsPartialMatch(forecastText2, "thunder"):
-                    WeatherNotification2 = "Storm Brewing! Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.";
-                    break;
-
-                default:
-                    WeatherNotification2 = WeatherDescription;
-                    break;
-            }
+            // Additional WeatherNotification for the current day
+            WeatherNotificationToday = GetWeatherNotificationText(WeatherDescription);
 
         }
+
+        private string GetWeatherNotificationText(string forecastText)
+        {
+            switch (true)
+            {
+                case var _ when ContainsPartialMatch(forecastText, "Sunny", "sun"):
+                    return "Glorious Sunshine Awaits. It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!";
+
+                case var _ when ContainsPartialMatch(forecastText, "rain"):
+                    return "Rainy Day Alert! It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!";
+
+                case var _ when ContainsPartialMatch(forecastText, "snow"):
+                    return "Snowflakes Are Falling! The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.";
+
+                case var _ when ContainsPartialMatch(forecastText, "Overcast", "cloud", "Fog"):
+                    return "Overcast Skies Today A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.";
+
+                case var _ when ContainsPartialMatch(forecastText, "thunder"):
+                    return "Storm Brewing! Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.";
+
+                default:
+                    return WeatherDescription;
+            }
+        }
+
         private bool ContainsPartialMatch(params string[] texts)
         {
             foreach (var text in texts)
@@ -457,6 +414,19 @@ namespace ForecastFavorApp.ViewModels
                  LocalNotificationCenter.Current.Show(notification);
             // Add a console print statement to confirm the notification is being sent
             Console.WriteLine($"Notification Sent: Title='{title}', Message='{message}'");
+        }
+        private string _weatherNotificationToday;
+        public string WeatherNotificationToday
+        {
+            get { return _weatherNotificationToday; }
+            set
+            {
+                if (_weatherNotificationToday != value)
+                {
+                    _weatherNotificationToday = value;
+                    OnPropertyChanged(nameof(WeatherNotificationToday));
+                }
+            }
         }
 
 

@@ -308,7 +308,7 @@
             <Frame CornerRadius="15" Margin="2,1,1,5" BackgroundColor="#606cf2">
             <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" HeightRequest="80" >
                      <Label Text="Forecast:" FontSize="Small" FontAttributes="Bold" TextColor="White"/>
-                     <Label Text="{Binding WeatherNotification0}" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="White" />
+                     <Label Text="{Binding WeatherNotificationToday}" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Small" TextColor="White" />
             </StackLayout>
             </Frame>
             <!-- AdMob Banner Ad -->
