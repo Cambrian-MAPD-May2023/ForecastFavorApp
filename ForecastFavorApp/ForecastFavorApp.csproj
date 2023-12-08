@@ -35,7 +35,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\forecastfavor_icon.png" Color="#FFFFFF" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Images\forecastfavor.png" Color="#FFFFFF" BaseSize="128,128" />
@@ -64,6 +64,7 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiIcon Include="Resources\AppIcon\forecastfavor_icon.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Images\humidity.png" />
@@ -73,6 +74,7 @@
 	  <None Remove="Resources\Images\wind.png" />
 	  <None Remove="Resources\Images\profile_icon.png" />
 	  <None Remove="Resources\Images\forecastfavor.png" />
+	  <None Remove="Resources\AppIcon\forecastfavor_icon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
