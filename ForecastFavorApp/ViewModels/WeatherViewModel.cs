@@ -305,32 +305,47 @@ namespace ForecastFavorApp.ViewModels
             }
         }
 
+        // This method checks weather conditions and user preferences to send notifications accordingly.
         private void CheckAndSendNotificationsBasedOnPreferences()
         {
             // Example: Check if it's sunny and user wants sunny notifications
             if (WeatherDescription.Contains("Sunny") && SunnyNotificationEnabled)
             {
+                // If it's sunny and sunny notifications are enabled, send a notification about the weather.
                 SendNotification("Glorious Sunshine Awaits", "It's a perfect day for a picnic or a leisurely walk in the park. Don't forget your sunscreen!");
             }
+
+            // Check for rainy conditions and user preferences.
             if (WeatherDescription.Contains("rain") && RainyNotificationEnabled)
             {
+                // If it's rainy and rainy notifications are enabled, send a notification about the weather.
                 SendNotification("Rainy Day Alert!", "It looks like it's time to grab your umbrella. A cozy coffee shop visit might be just the thing!");
             }
+
+            // Check for snowy conditions and user preferences.
             if (WeatherDescription.Contains("snow") && SnowyNotificationEnabled)
             {
+                // If it's snowy and snowy notifications are enabled, send a notification about the weather.
                 SendNotification("Snowflakes Are Falling!", "The world is your snow globe! A good day for building a snowman or enjoying hot chocolate by the fire.");
             }
+
+            // Check for thunderstorm conditions and user preferences.
             if (WeatherDescription.Contains("thunder") && StormNotificationEnabled)
             {
+                // If there's a thunderstorm and storm notifications are enabled, send a notification about the weather.
                 SendNotification("Storm Brewing!", "Best to stay indoors today. It's a great opportunity to catch up on a book or binge-watch your favorite show.");
             }
+
+            // Check for overcast, cloudy, or foggy conditions and user preferences.
             if ((WeatherDescription.Contains("Overcast") || WeatherDescription.Contains("cloud") || WeatherDescription.Contains("Fog")) && CloudyNotificationEnabled)
             {
+                // If it's overcast, cloudy, or foggy and cloudy notifications are enabled, send a notification about the weather.
                 SendNotification("Overcast Skies Today", "A moody sky sets the stage. Perfect for a trip to the museum or a relaxed day at home.");
             }
-
         }
-        
+
+
+
         private void WeatherNotificationLabel()
         {
             string forecastText0 = GetForecastText(0);
@@ -397,22 +412,27 @@ namespace ForecastFavorApp.ViewModels
             return ThreeDayForecastDetails[index].Condition.Text;
         }
 
+        // This method sends a notification with the specified title and message.
         private void SendNotification(string title, string message)
         {
+            // Create a new notification request.
             var notification = new NotificationRequest
             {
                 NotificationId = new Random().Next(),
                 Title = title,
                 Description = message,
                 ReturningData = "DetailInfo", // Custom data
-                BadgeNumber=42,
+                BadgeNumber = 42,
                 Schedule = new NotificationRequestSchedule
                 {
                     NotifyTime = DateTime.Now.AddSeconds(5),
                 }
             };
-                 LocalNotificationCenter.Current.Show(notification);
-            // Add a console print statement to confirm the notification is being sent
+
+            // Show the notification using the local notification center.
+            LocalNotificationCenter.Current.Show(notification);
+
+            // Add a console print statement to confirm the notification is being sent.
             Console.WriteLine($"Notification Sent: Title='{title}', Message='{message}'");
         }
         private string _weatherNotificationToday;
